@@ -7,14 +7,15 @@ namespace Drawing_App_v01
         //-----------------------------------------------------------------------------
         // Fields and Constants
         //-----------------------------------------------------------------------------
-        private readonly Drawing _drawing = new Drawing();
+        private readonly Drawing _drawing;
 
         //-----------------------------------------------------------------------------
         // Constructor  
         //-----------------------------------------------------------------------------
-        public MainWindow()
+        public MainWindow(Drawing drawing)
         {
             InitializeComponent();
+            _drawing = drawing;            
         }
 
         //-----------------------------------------------------------------------------
@@ -22,13 +23,7 @@ namespace Drawing_App_v01
         //-----------------------------------------------------------------------------
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            // to bee copied to: _drawing.Render(e.Graphics); 
-            foreach (Node node in _drawing.Nodes)
-            {
-                g.FillRectangle(Brushes.Black, node.X - node.Size / 2, node.Y - node.Size / 2, node.Size, node.Size);
-            }
-            
+            _drawing.Render(e.Graphics);         
         }
 
         private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
@@ -41,7 +36,7 @@ namespace Drawing_App_v01
         //-----------------------------------------------------------------------------
         // File Event Handlers
         //-----------------------------------------------------------------------------
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string filePath = FileHandler.OpenFileDialog();
             if (!string.IsNullOrEmpty(filePath) ) 
@@ -51,7 +46,7 @@ namespace Drawing_App_v01
             }
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string filePath = FileHandler.SaveFileDialog();
             if (!string.IsNullOrEmpty(filePath))
@@ -60,7 +55,7 @@ namespace Drawing_App_v01
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO: Implement Save As functionality
         }
@@ -71,7 +66,7 @@ namespace Drawing_App_v01
             canvasPanel.Invalidate();
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void BtnClear_Click(object sender, EventArgs e)
         {
             _drawing.ClearCanvas();
             canvasPanel.Invalidate();

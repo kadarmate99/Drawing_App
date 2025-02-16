@@ -12,8 +12,10 @@
 
         public void Render(Graphics g)
         {
-            // to be copied from MainWindow.cs
-            // to do this Di has to be done with the Drawing class into the MainWindow
+            foreach (Node node in Nodes)
+            {
+                g.FillRectangle(Brushes.Black, node.X - node.Size / 2, node.Y - node.Size / 2, node.Size, node.Size);
+            }
         }
 
         public void SetFilePath(string filePath)

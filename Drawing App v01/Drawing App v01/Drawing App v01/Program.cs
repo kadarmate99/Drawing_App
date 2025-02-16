@@ -13,7 +13,7 @@ namespace Drawing_App_v01
 
 
             // Create Main Window (disabled at first)
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(new Drawing());
             mainWindow.Enabled = false;
             mainWindow.Show();
 

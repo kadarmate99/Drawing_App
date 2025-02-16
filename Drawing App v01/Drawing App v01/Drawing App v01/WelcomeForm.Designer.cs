@@ -42,7 +42,7 @@
             btnCreate.TabIndex = 0;
             btnCreate.Text = "Create new file";
             btnCreate.UseVisualStyleBackColor = true;
-            btnCreate.Click += btnCreate_Click;
+            btnCreate.Click += BtnCreate_Click;
             // 
             // btnLoad
             // 
@@ -52,7 +52,7 @@
             btnLoad.TabIndex = 1;
             btnLoad.Text = "Load existing file";
             btnLoad.UseVisualStyleBackColor = true;
-            btnLoad.Click += btnLoad_Click;
+            btnLoad.Click += BtnLoad_Click;
             // 
             // label1
             // 
@@ -77,7 +77,7 @@
             Name = "WelcomeForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Drawing App - Create or load file";
-            Load += frmWelcomeForm_Load;
+            Load += WelcomeForm_Load;
             ResumeLayout(false);
         }
 

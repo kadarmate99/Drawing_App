@@ -19,17 +19,17 @@ namespace Drawing_App_v01
             InitializeComponent();
         }
 
-        private void frmWelcomeForm_Load(object sender, EventArgs e)
+        private void WelcomeForm_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void BtnCreate_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void BtnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
