@@ -36,6 +36,7 @@ namespace Drawing_App_v01
                 }
 
                 // maybe here should unsubsribe from FileSelectedToLoad
+                // test
                 welcomeForm.FileSelectedToLoad -= mainWindow.OnFileSelectedToLoad;
             }
 
