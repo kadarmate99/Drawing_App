@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Drawing_App_v01
 {
-    public partial class frmWelcomeForm : Form
+    public partial class WelcomeForm : Form
     {
         public event EventHandler<string> FileSelectedToLoad;
 
-        public frmWelcomeForm()
+        public WelcomeForm()
         {
             InitializeComponent();
         }

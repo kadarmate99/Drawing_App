@@ -1,6 +1,6 @@
 ﻿namespace Drawing_App_v01
 {
-    partial class frmWelcomeForm
+    partial class WelcomeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWelcomeForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WelcomeForm));
             btnCreate = new Button();
             btnLoad = new Button();
             label1 = new Label();
@@ -64,7 +64,7 @@
             label1.Text = "Welcome to the Drawing Application";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // frmWelcomeForm
+            // WelcomeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -74,7 +74,7 @@
             Controls.Add(btnCreate);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "frmWelcomeForm";
+            Name = "WelcomeForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Drawing App - Create or load file";
             Load += frmWelcomeForm_Load;

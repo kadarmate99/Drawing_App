@@ -1,6 +1,6 @@
 ﻿namespace Drawing_App_v01
 {
-    partial class frmMainWindow
+    partial class MainWindow
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             canvasPanel = new Panel();
             btnClear = new Button();
             menuStrip1 = new MenuStrip();
@@ -97,7 +97,7 @@
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
-            // frmMainWindow
+            // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -107,7 +107,7 @@
             Controls.Add(canvasPanel);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "frmMainWindow";
+            Name = "MainWindow";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Drawing App";
             menuStrip1.ResumeLayout(false);

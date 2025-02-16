@@ -10,6 +10,12 @@
             Nodes = new List<Node>();
         }
 
+        public void Render(Graphics g)
+        {
+            // to be copied from MainWindow.cs
+            // to do this Di has to be done with the Drawing class into the MainWindow
+        }
+
         public void SetFilePath(string filePath)
         {
             FilePath = filePath;

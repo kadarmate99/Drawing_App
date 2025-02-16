@@ -13,12 +13,12 @@ namespace Drawing_App_v01
 
 
             // Create Main Window (disabled at first)
-            frmMainWindow mainWindow = new frmMainWindow();
+            MainWindow mainWindow = new MainWindow();
             mainWindow.Enabled = false;
             mainWindow.Show();
 
             // Open Welcome Form as a modal dialog
-            using (frmWelcomeForm welcomeForm = new frmWelcomeForm())
+            using (WelcomeForm welcomeForm = new WelcomeForm())
             {
                 // Subscribe to the Load event inside mainWindow
                 welcomeForm.FileSelectedToLoad += mainWindow.OnFileSelectedToLoad;
