@@ -34,9 +34,8 @@ namespace Drawing_App_v01
                     mainWindow.Close();
                     return;
                 }
-                //test 02 comment
+                
                 // maybe here should unsubsribe from FileSelectedToLoad
-                // test
                 welcomeForm.FileSelectedToLoad -= mainWindow.OnFileSelectedToLoad;
             }
 
