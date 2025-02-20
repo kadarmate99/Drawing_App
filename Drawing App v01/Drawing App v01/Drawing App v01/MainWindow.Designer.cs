@@ -36,6 +36,8 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             saveAsToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
+            BtnLine = new Button();
+            BtnPoint = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,7 +50,8 @@
             canvasPanel.Size = new Size(800, 483);
             canvasPanel.TabIndex = 0;
             canvasPanel.Paint += CanvasPanel_Paint;
-            canvasPanel.MouseClick += CanvasPanel_MouseClick;
+            canvasPanel.MouseDown += CanvasPanel_MouseDown;
+            canvasPanel.MouseMove += CanvasPanel_MouseMove;
             // 
             // btnClear
             // 
@@ -97,19 +100,43 @@
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
             // 
+            // BtnLine
+            // 
+            BtnLine.Location = new Point(174, 516);
+            BtnLine.Name = "BtnLine";
+            BtnLine.Size = new Size(75, 25);
+            BtnLine.TabIndex = 4;
+            BtnLine.Text = "Line";
+            BtnLine.UseVisualStyleBackColor = true;
+            BtnLine.Click += BtnLine_Click;
+            // 
+            // BtnPoint
+            // 
+            BtnPoint.Location = new Point(93, 516);
+            BtnPoint.Name = "BtnPoint";
+            BtnPoint.Size = new Size(75, 25);
+            BtnPoint.TabIndex = 5;
+            BtnPoint.Text = "Point";
+            BtnPoint.UseVisualStyleBackColor = true;
+            BtnPoint.Click += BtnPoint_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(821, 553);
+            Controls.Add(BtnPoint);
+            Controls.Add(BtnLine);
             Controls.Add(menuStrip1);
             Controls.Add(btnClear);
             Controls.Add(canvasPanel);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainWindow";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Drawing App";
+            FormClosed += MainWindow_FormClosed;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -125,5 +152,7 @@
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
+        private Button BtnLine;
+        private Button BtnPoint;
     }
 }

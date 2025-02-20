@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Description: The initial window where users choose to create a new file or open an existing one.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,18 +33,12 @@ namespace Drawing_App_v01
 
         private void BtnLoad_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog()
-            {
-                Filter = "CSV Files|*.csv",
-                Title = "Load an existing a Drawing File"
-            };
+            string filePath = FileHandler.OpenFileDialog();
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (filePath != "")
             {
-                // possible memory leak problem
-                FileSelectedToLoad?.Invoke(this, openFileDialog.FileName);
+                FileSelectedToLoad?.Invoke(this, filePath);
 
-                               
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
