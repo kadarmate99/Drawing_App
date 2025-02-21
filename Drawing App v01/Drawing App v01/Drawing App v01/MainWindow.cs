@@ -1,6 +1,7 @@
 // Description: The primary application window
 
 using System.Windows.Forms;
+using Drawing_App_v01.ShapeComponents;
 
 namespace Drawing_App_v01
 {
@@ -10,8 +11,8 @@ namespace Drawing_App_v01
         // Fields
         //-----------------------------------------------------------------------------
         private string _clickType;
-        private Node _firstNode = null;  // Stores first point for line drawing
-        private Node _tempSecondNode = null;  // Temporary node for preview line
+        private Node ?_firstNode = null;  // Stores first point for line drawing
+        private Node ?_tempSecondNode = null;  // Temporary node for preview line
 
         private readonly DrawingManager _drawing;
 
@@ -53,20 +54,20 @@ namespace Drawing_App_v01
 
             if (_clickType == "point")
             {
-                _drawing.AddNode(tempNode);
+                _drawing.AddShape(tempNode);
             }
             else if (_clickType == "line")
             {
                 if (_firstNode == null)
                 {
                     _firstNode = tempNode;
-                    _drawing.AddNode(tempNode);
+                    _drawing.AddShape(tempNode);
                 }
                 else
                 {
                     Node secondNode = tempNode;
-                    _drawing.AddNode(secondNode);
-                    _drawing.AddLine(new Line(_firstNode, secondNode));
+                    _drawing.AddShape(secondNode);
+                    _drawing.AddShape(new Line(_firstNode, secondNode));
 
                     // Reset for next line
                     _firstNode = null;

@@ -1,36 +1,27 @@
 ﻿// Description: Centralized class for managing all drawing-related data
 
 using System.IO;
+using Drawing_App_v01.ShapeComponents;
 
 namespace Drawing_App_v01
 {
     public class DrawingManager
     {
         private FileStream _fileStream;
-        public List<Node> Nodes { get; private set; }
-        public List<Line> Lines { get; private set; }
+        public List<Shape> Shapes { get; private set; }
+        
         public string FilePath { get; private set; }
 
         public DrawingManager()
         {
-            Nodes = new List<Node>();
-            Lines = new List<Line>();
+            Shapes = new List<Shape>();
         }
 
         public void Render(Graphics g)
         {
-            foreach (Node node in Nodes)
+            foreach (Shape shape in Shapes)
             {
-                g.FillRectangle(Brushes.Black, node.X - node.Size / 2, node.Y - node.Size / 2, node.Size, node.Size);
-            }
-
-            
-            foreach (Line line in Lines)
-            {
-                using (Pen pen = new Pen(Color.Black, line.LineWeight))
-                {
-                    g.DrawLine(pen, line.StartingPoint.X, line.StartingPoint.Y, line.EndingPoint.X, line.EndingPoint.Y);
-                }
+                shape.Draw(g);
             }
         }
 
@@ -39,54 +30,43 @@ namespace Drawing_App_v01
             FilePath = filePath;
         }
 
-        public void AddNode(Node node)
+        public void AddShape(Shape shape)
         {
-            Nodes.Add(node);
+            Shapes.Add(shape);
         }
 
-        public void RemoveNode(Node node)
+        public void RemoveShape(Shape shape)
         {
-            Nodes.Remove(node);
-        }
-
-        public void AddLine(Line line)
-        {
-            Lines.Add(line);
-        }
-
-        public void RemoveLine(Line line)
-        {
-            Lines.Remove(line);
+            Shapes.Remove(shape);
         }
 
         public void ClearCanvas()
         {
-            Nodes.Clear();
-            Lines.Clear();
+            Shapes.Clear();
         }
 
         public void SaveAs(string filePath)
         {
-            SetFilePath(filePath);
+            //SetFilePath(filePath);
 
-            using (StreamWriter writer = new StreamWriter(FilePath))
-            {
-                foreach (Node node in Nodes)
-                {
-                    writer.WriteLine($"{node.X},{node.Y},{node.Size}");
-                }
-            }
+            //using (StreamWriter writer = new StreamWriter(FilePath))
+            //{
+            //    foreach (Node node in Nodes)
+            //    {
+            //        writer.WriteLine($"{node.X},{node.Y},{node.ShapeLineWeight}");
+            //    }
+            //}
         }
 
         public void Save()
         {
-            using (StreamWriter writer = new StreamWriter(FilePath))
-            {
-                foreach (Node node in Nodes)
-                {
-                    writer.WriteLine($"{node.X},{node.Y},{node.Size}");
-                }
-            }
+            //using (StreamWriter writer = new StreamWriter(FilePath))
+            //{
+            //    foreach (Node node in Nodes)
+            //    {
+            //        writer.WriteLine($"{node.X},{node.Y},{node.ShapeLineWeight}");
+            //    }
+            //}
         }
 
         public void LoadDrawingFile(string filePath)
@@ -108,8 +88,8 @@ namespace Drawing_App_v01
                                 var parts = line.Split(',');
                                 int x = int.Parse(parts[0]);
                                 int y = int.Parse(parts[1]);
-                                int size = int.Parse(parts[2]);
-                                Nodes.Add(new Node(x, y, size));
+                                int ShapeWidth = int.Parse(parts[2]);
+                                Shapes.Add(new Node(x, y, ShapeWidth));
                             }
                         }
                     }
