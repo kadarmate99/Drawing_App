@@ -136,7 +136,6 @@
             Name = "MainWindow";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Drawing App";
-            FormClosed += MainWindow_FormClosed;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
