@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WelcomeForm));
             btnCreate = new Button();
-            btnLoad = new Button();
+            btnOpen = new Button();
             label1 = new Label();
             SuspendLayout();
             // 
@@ -44,15 +44,15 @@
             btnCreate.UseVisualStyleBackColor = true;
             btnCreate.Click += BtnCreate_Click;
             // 
-            // btnLoad
+            // btnOpen
             // 
-            btnLoad.Location = new Point(258, 98);
-            btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(120, 23);
-            btnLoad.TabIndex = 1;
-            btnLoad.Text = "Load existing file";
-            btnLoad.UseVisualStyleBackColor = true;
-            btnLoad.Click += BtnLoad_Click;
+            btnOpen.Location = new Point(258, 98);
+            btnOpen.Name = "btnOpen";
+            btnOpen.Size = new Size(120, 23);
+            btnOpen.TabIndex = 1;
+            btnOpen.Text = "Open existing file";
+            btnOpen.UseVisualStyleBackColor = true;
+            btnOpen.Click += BtnOpen_Click;
             // 
             // label1
             // 
@@ -70,7 +70,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(484, 161);
             Controls.Add(label1);
-            Controls.Add(btnLoad);
+            Controls.Add(btnOpen);
             Controls.Add(btnCreate);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -84,7 +84,7 @@
         #endregion
 
         private Button btnCreate;
-        private Button btnLoad;
+        private Button btnOpen;
         private Label label1;
     }
 }

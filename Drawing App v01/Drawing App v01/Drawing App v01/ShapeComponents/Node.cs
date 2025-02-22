@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using Newtonsoft.Json;
 
 namespace Drawing_App_v01.ShapeComponents
 {
     public class Node : Shape
     {
+        [JsonProperty]
         public int X { get; set; }
+        [JsonProperty]
         public int Y { get; set; }
         
         public Node(int x, int y, int size = 5, Color? color = null)
@@ -19,6 +16,9 @@ namespace Drawing_App_v01.ShapeComponents
             ShapeLineWeight = size;
             ShapeColor = color ?? Color.Black; // Default to Black if no color is provided
         }
+
+        [JsonConstructor]
+        public Node() { }
 
         public override void Draw(Graphics g)
         {

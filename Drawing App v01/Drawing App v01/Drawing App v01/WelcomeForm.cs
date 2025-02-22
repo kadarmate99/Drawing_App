@@ -14,7 +14,8 @@ namespace Drawing_App_v01
 {
     public partial class WelcomeForm : Form
     {
-        public event EventHandler<string> FileSelectedToLoad;
+        public event EventHandler<string> FileSelectedToOpen;
+        public event EventHandler<string> FileSelectedToCreate;
 
         public WelcomeForm()
         {
@@ -28,16 +29,24 @@ namespace Drawing_App_v01
 
         private void BtnCreate_Click(object sender, EventArgs e)
         {
+            string filePath = FileDialogHelper.CreateFileDialog();
 
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                FileSelectedToCreate?.Invoke(this, filePath);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
-        private void BtnLoad_Click(object sender, EventArgs e)
+        private void BtnOpen_Click(object sender, EventArgs e)
         {
-            string filePath = FileHandler.OpenFileDialog();
+            string filePath = FileDialogHelper.OpenFileDialog();
 
-            if (filePath != "")
+            if (!string.IsNullOrEmpty(filePath))
             {
-                FileSelectedToLoad?.Invoke(this, filePath);
+                FileSelectedToOpen?.Invoke(this, filePath);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

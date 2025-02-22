@@ -15,8 +15,8 @@ namespace Drawing_App_v01
             // Create Main Window (disabled at first)
 
             // Create dependencies
-            DrawingManager drawingManager = new DrawingManager();
-            MainWindowPresenter mainWindowPresenter = new MainWindowPresenter(drawingManager);
+            DrawingModel drawingModel = new DrawingModel();
+            MainWindowPresenter mainWindowPresenter = new MainWindowPresenter(drawingModel);
             MainWindow mainWindow = new MainWindow(mainWindowPresenter);
 
             // Diable Main Window on opening
@@ -27,7 +27,8 @@ namespace Drawing_App_v01
             using (WelcomeForm welcomeForm = new WelcomeForm())
             {
                 // Subscribe to the Load event inside mainWindow
-                welcomeForm.FileSelectedToLoad += mainWindowPresenter.OnFileSelectedToLoad;
+                welcomeForm.FileSelectedToOpen += mainWindowPresenter.OnFileSelectedToOpen;
+                welcomeForm.FileSelectedToCreate += mainWindowPresenter.OnFileSelectedToCreate;
 
                 if (welcomeForm.ShowDialog() == DialogResult.OK)
                 {
@@ -42,7 +43,8 @@ namespace Drawing_App_v01
                 }
                 
                 // maybe here should unsubsribe from FileSelectedToLoad
-                welcomeForm.FileSelectedToLoad -= mainWindowPresenter.OnFileSelectedToLoad;
+                welcomeForm.FileSelectedToOpen -= mainWindowPresenter.OnFileSelectedToOpen;
+                welcomeForm.FileSelectedToCreate -= mainWindowPresenter.OnFileSelectedToCreate;
             }
 
             Application.Run(mainWindow);

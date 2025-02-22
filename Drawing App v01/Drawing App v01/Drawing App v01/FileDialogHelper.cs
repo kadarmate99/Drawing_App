@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace Drawing_App_v01
 {
-    public static class FileHandler
+    public static class FileDialogHelper
     {
         public static string OpenFileDialog()
         {
             using OpenFileDialog openFileDialog = new OpenFileDialog()
             {
-                Filter = "CSV Files | *.csv",
+                Filter = "JSON Files(*.json) | *.json",
                 Title = "Select a file to load"
             };
             return openFileDialog.ShowDialog() == DialogResult.OK ? openFileDialog.FileName : string.Empty;
@@ -23,7 +23,20 @@ namespace Drawing_App_v01
         public static string SaveFileDialog()
         {
             using SaveFileDialog saveFileDialog = new SaveFileDialog()
-            { Filter = "CSV Files | *.csv" };
+            { 
+                Filter = "JSON Files(*.json) | *.json",
+                Title = "Set path and file name to save the drawing"
+            };
+            return saveFileDialog.ShowDialog() == DialogResult.OK ? saveFileDialog.FileName : string.Empty;
+        }
+
+        public static string CreateFileDialog()
+        {
+            using SaveFileDialog saveFileDialog = new SaveFileDialog()
+            { 
+                Filter = "JSON Files(*.json) | *.json",
+                Title = "Create a file to load"
+            };
             return saveFileDialog.ShowDialog() == DialogResult.OK ? saveFileDialog.FileName : string.Empty;
         }
     }

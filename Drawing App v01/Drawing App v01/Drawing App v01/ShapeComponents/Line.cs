@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Drawing_App_v01.ShapeComponents
 {
+    /// <summary>
+    /// Represents a line shape.
+    /// </summary>
     public class Line : Shape
     {
+        [JsonProperty]
         public Node StartingPoint { get; set; }
+        [JsonProperty]
         public Node EndingPoint { get; set; }
 
         public Line(Node startingPoint, Node endingPoint, int lineWeight = 1)
@@ -17,6 +18,9 @@ namespace Drawing_App_v01.ShapeComponents
             EndingPoint = endingPoint;
             ShapeLineWeight = lineWeight;
         }
+
+        [JsonConstructor]
+        public Line() { }
 
         public override void Draw(Graphics g)
         {
