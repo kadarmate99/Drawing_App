@@ -1,3 +1,6 @@
+using Drawing_App_v01.Model;
+using Drawing_App_v01.Presenter;
+
 namespace Drawing_App_v01
 {
     internal static class Program

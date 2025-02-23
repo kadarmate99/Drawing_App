@@ -38,6 +38,7 @@
             openToolStripMenuItem = new ToolStripMenuItem();
             BtnLine = new Button();
             BtnPoint = new Button();
+            BtnRectangle = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -120,11 +121,22 @@
             BtnPoint.UseVisualStyleBackColor = true;
             BtnPoint.Click += BtnPoint_Click;
             // 
+            // BtnRectangle
+            // 
+            BtnRectangle.Location = new Point(255, 516);
+            BtnRectangle.Name = "BtnRectangle";
+            BtnRectangle.Size = new Size(75, 25);
+            BtnRectangle.TabIndex = 6;
+            BtnRectangle.Text = "Rectangle";
+            BtnRectangle.UseVisualStyleBackColor = true;
+            BtnRectangle.Click += BtnRectangle_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(821, 553);
+            Controls.Add(BtnRectangle);
             Controls.Add(BtnPoint);
             Controls.Add(BtnLine);
             Controls.Add(menuStrip1);
@@ -153,5 +165,6 @@
         private ToolStripMenuItem openToolStripMenuItem;
         private Button BtnLine;
         private Button BtnPoint;
+        private Button BtnRectangle;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 // Description: Handles save/load functionality, ensuring object data is preserved.
 
-namespace Drawing_App_v01
+namespace Drawing_App_v01.Presenter
 {
     public static class FileDialogHelper
     {
@@ -23,7 +23,7 @@ namespace Drawing_App_v01
         public static string SaveFileDialog()
         {
             using SaveFileDialog saveFileDialog = new SaveFileDialog()
-            { 
+            {
                 Filter = "JSON Files(*.json) | *.json",
                 Title = "Set path and file name to save the drawing"
             };
@@ -33,7 +33,7 @@ namespace Drawing_App_v01
         public static string CreateFileDialog()
         {
             using SaveFileDialog saveFileDialog = new SaveFileDialog()
-            { 
+            {
                 Filter = "JSON Files(*.json) | *.json",
                 Title = "Create a file to load"
             };

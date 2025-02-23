@@ -1,15 +1,14 @@
 ﻿// Description: Centralized class for managing all drawing-related data
 
 using System.IO;
-using Drawing_App_v01.ShapeComponents;
+using Drawing_App_v01.Model.ShapeComponents;
 
-namespace Drawing_App_v01
+namespace Drawing_App_v01.Model
 {
     public class DrawingModel
     {
-        private FileStream _fileStream;
         public List<Shape> Shapes { get; private set; }
-        
+
         public string FilePath { get; private set; }
 
         public DrawingModel()
@@ -17,12 +16,17 @@ namespace Drawing_App_v01
             Shapes = new List<Shape>();
         }
 
-        public void Render(Graphics g)
+        public void RenderModel(Graphics g)
         {
             foreach (Shape shape in Shapes)
             {
                 shape.Draw(g);
             }
+        }
+
+        public void RenderShape(Graphics g, Shape shape)
+        {
+            shape.Draw(g);
         }
 
         public void SetFilePath(string filePath)

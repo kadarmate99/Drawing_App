@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using Drawing_App_v01.ShapeComponents;
 using System.Collections.Generic;
 using System.IO;
+using Drawing_App_v01.Model.ShapeComponents;
 
 
-namespace Drawing_App_v01
+namespace Drawing_App_v01.Presenter
 {
     public class FileSerializationService
     {
@@ -16,7 +16,7 @@ namespace Drawing_App_v01
 
         public List<Shape> LoadDrawingFromFile(string filePath)
         {
-            
+
             List<Shape> shapes = new List<Shape>();
 
             if (File.Exists(filePath))
@@ -24,7 +24,7 @@ namespace Drawing_App_v01
                 try
                 {
                     string jsonData = File.ReadAllText(filePath);
-                    return JsonConvert.DeserializeObject<List<Shape>>(jsonData , _jsonSerializerSettings) ?? new List<Shape>();
+                    return JsonConvert.DeserializeObject<List<Shape>>(jsonData, _jsonSerializerSettings) ?? new List<Shape>();
                 }
                 catch (JsonException ex)
                 {

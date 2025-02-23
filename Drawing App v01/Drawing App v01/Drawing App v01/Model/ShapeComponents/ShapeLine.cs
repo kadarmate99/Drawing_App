@@ -1,26 +1,25 @@
 ﻿using Newtonsoft.Json;
 
-namespace Drawing_App_v01.ShapeComponents
+namespace Drawing_App_v01.Model.ShapeComponents
 {
     /// <summary>
     /// Represents a line shape.
     /// </summary>
-    public class Line : Shape
+    public class ShapeLine : Shape
     {
-        [JsonProperty]
         public Node StartingPoint { get; set; }
-        [JsonProperty]
         public Node EndingPoint { get; set; }
 
-        public Line(Node startingPoint, Node endingPoint, int lineWeight = 1)
+        public ShapeLine(Node startingPoint, Node endingPoint, int lineWeight = 1, Color? color = null)
         {
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
             ShapeLineWeight = lineWeight;
+            ShapeColor = color ?? Color.Black; // Default to Black if no color is provided
         }
 
         [JsonConstructor]
-        public Line() { }
+        public ShapeLine() { }
 
         public override void Draw(Graphics g)
         {

@@ -1,14 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace Drawing_App_v01.ShapeComponents
+namespace Drawing_App_v01.Model.ShapeComponents
 {
     public class Node : Shape
     {
-        [JsonProperty]
         public int X { get; set; }
-        [JsonProperty]
         public int Y { get; set; }
-        
+
         public Node(int x, int y, int size = 5, Color? color = null)
         {
             X = x;

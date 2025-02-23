@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Drawing_App_v01.ShapeComponents;
+using Drawing_App_v01.Model;
+using Drawing_App_v01.Model.ShapeComponents;
 
-namespace Drawing_App_v01
+namespace Drawing_App_v01.Presenter
 {
     public class MainWindowPresenter
     {
@@ -13,7 +14,7 @@ namespace Drawing_App_v01
         // Fields
         //-----------------------------------------------------------------------------
         private readonly DrawingModel _drawingModel;
-        private string _clickType;
+        private ClickMode _clickMode = ClickMode.None; // Enum to keep track of what shape the user wants to define
         private Node? _firstNode = null;  // Stores first point for line drawing
         private Node? _tempSecondNode = null;  // Temporary node for preview line
         private MainWindow _view;
@@ -34,12 +35,17 @@ namespace Drawing_App_v01
         internal void OnCanvasPanel_Paint(PaintEventArgs e)
         {
             e.Graphics.Clear(Color.White);
-            _drawingModel.Render(e.Graphics);
+            _drawingModel.RenderModel(e.Graphics);
 
-            // Draw temporary line when defining a new line
-            if (_clickType == "line" && _firstNode != null && _tempSecondNode != null)
+            // Draw temporary object during definition
+            // TODO: Not sure if this is the correct place for this code, might needs rethinking
+            if (_clickMode == ClickMode.Line && _firstNode != null && _tempSecondNode != null)
             {
-                e.Graphics.DrawLine(Pens.Black, _firstNode.X, _firstNode.Y, _tempSecondNode.X, _tempSecondNode.Y);
+                _drawingModel.RenderShape(e.Graphics, new ShapeLine(_firstNode, _tempSecondNode));
+            }
+            else if (_clickMode == ClickMode.Rectangle && _firstNode != null && _tempSecondNode != null)
+            {
+                _drawingModel.RenderShape(e.Graphics, new ShapeRectangle(_firstNode, _tempSecondNode));
             }
         }
         internal void OnCanvasPanel_MouseDown(MouseEventArgs e)
@@ -47,11 +53,11 @@ namespace Drawing_App_v01
 
             Node tempNode = new Node(e.X, e.Y);
 
-            if (_clickType == "point")
+            if (_clickMode == ClickMode.Point)
             {
                 _drawingModel.AddShape(tempNode);
             }
-            else if (_clickType == "line")
+            else if (_clickMode == ClickMode.Line)
             {
                 if (_firstNode == null)
                 {
@@ -62,19 +68,41 @@ namespace Drawing_App_v01
                 {
                     Node secondNode = tempNode;
                     _drawingModel.AddShape(secondNode);
-                    _drawingModel.AddShape(new Line(_firstNode, secondNode));
+                    _drawingModel.AddShape(new ShapeLine(_firstNode, secondNode));
 
                     // Reset for next line
                     _firstNode = null;
                     _tempSecondNode = null;
                 }
             }
+            else if (_clickMode == ClickMode.Rectangle)
+            {
+                if (_firstNode == null)
+                {
+                    _firstNode = tempNode;
+                    _drawingModel.AddShape(tempNode);
+                }
+                else
+                {
+                    Node secondNode = tempNode;
+                    ShapeRectangle rectangle = new ShapeRectangle(_firstNode, secondNode);
+                    _drawingModel.AddShape(rectangle);
 
-            _view.InvalidateCanvas();
+                    //Creating corner point -
+                    //TODO: One point is extra here because on the first click one nod was already created.This needs to be fixed. 
+                    _drawingModel.AddShape(new Node(rectangle.CornerPoint_01.X, rectangle.CornerPoint_01.Y));
+                    _drawingModel.AddShape(new Node(rectangle.CornerPoint_02.X, rectangle.CornerPoint_02.Y));
+                    _drawingModel.AddShape(new Node(rectangle.CornerPoint_03.X, rectangle.CornerPoint_03.Y));
+                    _drawingModel.AddShape(new Node(rectangle.CornerPoint_04.X, rectangle.CornerPoint_04.Y));
+                    _firstNode = null;
+                    _tempSecondNode = null;
+                }
+            }
+                _view.InvalidateCanvas();
         }
         internal void OnCanvasPanel_MouseMove(MouseEventArgs e)
         {
-            if (_clickType == "line" && _firstNode != null)
+            if (_firstNode != null)
             {
                 _tempSecondNode = new Node(e.X, e.Y);
                 _view.InvalidateCanvas();
@@ -84,14 +112,19 @@ namespace Drawing_App_v01
         //- - - - -  Button click related events  - - - - -
         internal void OnBtnPoint_Click()
         {
-            _clickType = "point";
+            _clickMode = ClickMode.Point;
         }
         internal void OnBtnLine_Click()
         {
-            _clickType = "line";
+            _clickMode = ClickMode.Line;
+        }
+        internal void OnBtnRectangle_Click()
+        {
+            _clickMode = ClickMode.Rectangle;
         }
         internal void OnBtnClear_Click()
         {
+            _clickMode = ClickMode.None;
             _drawingModel.ClearSahpes();
             _view.InvalidateCanvas();
         }
@@ -174,5 +207,7 @@ namespace Drawing_App_v01
                 fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes);
             }
         }
+
+
     }
 }

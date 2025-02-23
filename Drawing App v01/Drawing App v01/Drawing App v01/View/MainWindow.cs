@@ -1,7 +1,7 @@
 // Description: The primary application window
 
 using System.Windows.Forms;
-using Drawing_App_v01.ShapeComponents;
+using Drawing_App_v01.Presenter;
 
 namespace Drawing_App_v01
 {
@@ -60,6 +60,10 @@ namespace Drawing_App_v01
         {
             _presenter.OnBtnLine_Click();
         }
+        private void BtnRectangle_Click(object sender, EventArgs e)
+        {
+            _presenter.OnBtnRectangle_Click();
+        }
         private void BtnClear_Click(object sender, EventArgs e)
         {
             _presenter.OnBtnClear_Click();
@@ -73,7 +77,7 @@ namespace Drawing_App_v01
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _presenter.OnSaveToolStripMenuItem_Click();
-            
+
         }
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -87,5 +91,7 @@ namespace Drawing_App_v01
         {
             canvasPanel.Invalidate();
         }
+
+        
     }
 }
