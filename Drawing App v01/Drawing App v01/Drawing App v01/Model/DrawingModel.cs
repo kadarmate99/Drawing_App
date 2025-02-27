@@ -7,24 +7,24 @@ namespace Drawing_App_v01.Model
 {
     public class DrawingModel
     {
-        public List<Shape> Shapes { get; private set; }
+        public List<ShapeBase> Shapes { get; private set; }
 
         public string FilePath { get; private set; }
 
         public DrawingModel()
         {
-            Shapes = new List<Shape>();
+            Shapes = new List<ShapeBase>();
         }
 
         public void RenderModel(Graphics g)
         {
-            foreach (Shape shape in Shapes)
+            foreach (ShapeBase shape in Shapes)
             {
                 shape.Draw(g);
             }
         }
 
-        public void RenderShape(Graphics g, Shape shape)
+        public void RenderShape(Graphics g, ShapeBase shape)
         {
             shape.Draw(g);
         }
@@ -34,12 +34,12 @@ namespace Drawing_App_v01.Model
             FilePath = filePath;
         }
 
-        public void AddShape(Shape shape)
+        public void AddShape(ShapeBase shape)
         {
             Shapes.Add(shape);
         }
 
-        public void RemoveShape(Shape shape)
+        public void RemoveShape(ShapeBase shape)
         {
             Shapes.Remove(shape);
         }

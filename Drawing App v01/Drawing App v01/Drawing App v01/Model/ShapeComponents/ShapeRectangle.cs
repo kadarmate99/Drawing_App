@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Drawing_App_v01.Model.ShapeComponents
 {
-    internal class ShapeRectangle : Shape
+    internal class ShapeRectangle : ShapeBase
     {
         /// <summary>
         /// Upper left corner point of rectangle

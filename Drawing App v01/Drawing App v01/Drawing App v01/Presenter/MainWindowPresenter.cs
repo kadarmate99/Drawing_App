@@ -25,12 +25,12 @@ namespace Drawing_App_v01.Presenter
         //Provide ways for external code to interact with the class safely, rather than directly accessing the fields.
 
         public MainWindow View
-            { get { return _view; } }
+        { get { return _view; } }
 
-        public IDrawingState CurrentDrawingState 
-        { 
-            get { return _currentDrawingState; } 
-            set { _currentDrawingState = value; } 
+        public IDrawingState CurrentDrawingState
+        {
+            get { return _currentDrawingState; }
+            set { _currentDrawingState = value; }
         }
 
         //-----------------------------------------------------------------------------
@@ -50,7 +50,14 @@ namespace Drawing_App_v01.Presenter
         {
             _drawingModel.RenderModel(e.Graphics);
 
+            if (_currentDrawingState is ShapeDrawingStateBase shapeState)
+            {
+                shapeState.TemporaryDraw(e.Graphics);
+            }
+
+
             // TODO: Remove this if-else if block by applying polymorphism, by changeing the IDrawingState into an abstract class
+            /*
             if (_currentDrawingState is LineDrawingState lineState)
             {
                 lineState.DrawTemporaryLine(e.Graphics);
@@ -59,7 +66,7 @@ namespace Drawing_App_v01.Presenter
             {
                 rectangleState.DrawTemporaryRectangle(e.Graphics);
             }
-
+            */
         }
         internal void OnCanvasPanel_MouseDown(MouseEventArgs e)
         {
@@ -67,13 +74,16 @@ namespace Drawing_App_v01.Presenter
         }
         internal void OnCanvasPanel_MouseMove(MouseEventArgs e)
         {
-            _currentDrawingState?.HandleMouseMove(this, _drawingModel, e.X, e.Y);
+            if (_currentDrawingState is ShapeDrawingStateBase shapeState)
+            {
+                shapeState?.HandleMouseMove(this, _drawingModel, e.X, e.Y);
+            }
         }
 
         //- - - - -  Button click related events  - - - - -
         internal void OnBtnPoint_Click()
         {
-            _currentDrawingState = new PointDrawingState();
+            _currentDrawingState = new NodeDrawingState();
         }
         internal void OnBtnLine_Click()
         {
@@ -135,7 +145,7 @@ namespace Drawing_App_v01.Presenter
                 FileSerializationService fileSerializationService = new FileSerializationService();
                 try
                 {
-                    List<Shape> shapes = fileSerializationService.LoadDrawingFromFile(filePath);
+                    List<ShapeBase> shapes = fileSerializationService.LoadDrawingFromFile(filePath);
                     _drawingModel.ClearSahpes(); // Clear existing shapes
                     foreach (var shape in shapes)
                     {

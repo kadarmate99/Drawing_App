@@ -2,7 +2,7 @@
 
 namespace Drawing_App_v01.Model.ShapeComponents
 {
-    public class Node : Shape
+    public class Node : ShapeBase
     {
         public int X { get; set; }
         public int Y { get; set; }

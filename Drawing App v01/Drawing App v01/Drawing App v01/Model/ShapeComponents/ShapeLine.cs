@@ -5,7 +5,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
     /// <summary>
     /// Represents a line shape.
     /// </summary>
-    public class ShapeLine : Shape
+    public class ShapeLine : ShapeBase
     {
         public Node StartingPoint { get; set; }
         public Node EndingPoint { get; set; }

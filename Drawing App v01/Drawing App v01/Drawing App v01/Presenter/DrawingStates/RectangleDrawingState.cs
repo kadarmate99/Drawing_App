@@ -4,18 +4,15 @@ using Drawing_App_v01.Presenter.Commands;
 
 namespace Drawing_App_v01.Presenter.DrawingStates
 {
-    public class RectangleDrawingState : IDrawingState
+    public class RectangleDrawingState : ShapeDrawingStateBase
     {
         private Node _startPoint;
         private Node _currentPoint;
         private bool _isDrawing;
 
-        public RectangleDrawingState()
-        {
-            _isDrawing = false;
-        }
+        public RectangleDrawingState() : base() {}
 
-        public void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
+        public override void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (!_isDrawing)
             {
@@ -31,7 +28,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
             }
         }
 
-        public void HandleMouseMove(MainWindowPresenter presenter, DrawingModel model, int x, int y)
+        public override void HandleMouseMove(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (_isDrawing)
             {
@@ -40,12 +37,12 @@ namespace Drawing_App_v01.Presenter.DrawingStates
             }
         }
 
-        internal void DrawTemporaryRectangle(Graphics graphics)
+        public override void TemporaryDraw (Graphics g)
         {
             if (_isDrawing && _startPoint != null && _currentPoint != null)
             {
                 ShapeRectangle rectangle = new ShapeRectangle(_startPoint, _currentPoint);
-                rectangle.Draw(graphics);
+                rectangle.Draw(g);
             }
         }
     }

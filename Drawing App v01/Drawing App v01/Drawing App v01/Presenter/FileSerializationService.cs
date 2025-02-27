@@ -14,37 +14,37 @@ namespace Drawing_App_v01.Presenter
             Formatting = Formatting.Indented
         };
 
-        public List<Shape> LoadDrawingFromFile(string filePath)
+        public List<ShapeBase> LoadDrawingFromFile(string filePath)
         {
 
-            List<Shape> shapes = new List<Shape>();
+            List<ShapeBase> shapes = new List<ShapeBase>();
 
             if (File.Exists(filePath))
             {
                 try
                 {
                     string jsonData = File.ReadAllText(filePath);
-                    return JsonConvert.DeserializeObject<List<Shape>>(jsonData, _jsonSerializerSettings) ?? new List<Shape>();
+                    return JsonConvert.DeserializeObject<List<ShapeBase>>(jsonData, _jsonSerializerSettings) ?? new List<ShapeBase>();
                 }
                 catch (JsonException ex)
                 {
                     MessageBox.Show($"Error deserializing JSON: {ex.Message}", "Error");
-                    return new List<Shape>();
+                    return new List<ShapeBase>();
                 }
                 catch (IOException ex)
                 {
                     MessageBox.Show($"IO Error: {ex.Message}", "Error");
-                    return new List<Shape>();
+                    return new List<ShapeBase>();
                 }
             }
             else
             {
                 MessageBox.Show($"File not found: {filePath}", "Error");
-                return new List<Shape>();
+                return new List<ShapeBase>();
             }
         }
 
-        public void SaveDrawingToFile(string filePath, List<Shape> shapes)
+        public void SaveDrawingToFile(string filePath, List<ShapeBase> shapes)
         {
             string jsonData = JsonConvert.SerializeObject(shapes, _jsonSerializerSettings);
             File.WriteAllText(filePath, jsonData);

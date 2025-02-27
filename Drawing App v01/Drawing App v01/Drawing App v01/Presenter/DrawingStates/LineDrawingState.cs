@@ -9,18 +9,11 @@ namespace Drawing_App_v01.Presenter.DrawingStates
     /// Implements IDrawingState to handle drawing lines.
     /// Uses DrawLineCommand to draw a line.
     /// </summary>
-    public class LineDrawingState : IDrawingState
+    public class LineDrawingState : ShapeDrawingStateBase
     {
-        private Node _startPoint;
-        private Node _currentPoint;
-        private bool _isDrawing;
+        public LineDrawingState(): base() {}
 
-        public LineDrawingState()
-        {
-            _isDrawing = false;
-        }
-        
-        public void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
+        public override void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (!_isDrawing)
             {
@@ -36,7 +29,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
             }
         }
 
-        public void HandleMouseMove(MainWindowPresenter presenter, DrawingModel model, int x, int y)
+        public override void HandleMouseMove(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (_isDrawing)
             {
@@ -45,7 +38,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
             }
         }
 
-        public void DrawTemporaryLine(Graphics g)
+        public override void TemporaryDraw(Graphics g)
         {
             if (_isDrawing && _startPoint != null && _currentPoint != null)
             {
