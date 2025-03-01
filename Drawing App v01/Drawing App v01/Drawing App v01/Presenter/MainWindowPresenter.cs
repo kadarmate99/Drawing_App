@@ -54,6 +54,19 @@ namespace Drawing_App_v01.Presenter
             {
                 shapeState.TemporaryDraw(e.Graphics);
             }
+
+
+            // TODO: Remove this if-else if block by applying polymorphism, by changeing the IDrawingState into an abstract class
+            /*
+            if (_currentDrawingState is LineDrawingState lineState)
+            {
+                lineState.DrawTemporaryLine(e.Graphics);
+            }
+            else if (_currentDrawingState is RectangleDrawingState rectangleState)
+            {
+                rectangleState.DrawTemporaryRectangle(e.Graphics);
+            }
+            */
         }
         internal void OnCanvasPanel_MouseDown(MouseEventArgs e)
         {
@@ -79,14 +92,6 @@ namespace Drawing_App_v01.Presenter
         internal void OnBtnRectangle_Click()
         {
             _currentDrawingState = new RectangleDrawingState();
-        }
-        internal void OnBtnCircle_Click()
-        {
-            _currentDrawingState = new CircleDrawingState();
-        }
-        internal void BtnRhombus_Click()
-        {
-            _currentDrawingState = new RhombusDrawingState();
         }
         internal void OnBtnClear_Click()
         {
@@ -175,5 +180,7 @@ namespace Drawing_App_v01.Presenter
                 fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes);
             }
         }
+
+
     }
 }

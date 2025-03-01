@@ -64,14 +64,6 @@ namespace Drawing_App_v01
         {
             _presenter.OnBtnRectangle_Click();
         }
-        private void BtnCircle_Click(object sender, EventArgs e)
-        {
-            _presenter.OnBtnCircle_Click();
-        }
-        private void BtnRhombus_Click(object sender, EventArgs e)
-        {
-            _presenter.BtnRhombus_Click();
-        }
         private void BtnClear_Click(object sender, EventArgs e)
         {
             _presenter.OnBtnClear_Click();
@@ -99,5 +91,7 @@ namespace Drawing_App_v01
         {
             canvasPanel.Invalidate();
         }
+
+        
     }
 }

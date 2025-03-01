@@ -39,8 +39,6 @@
             BtnLine = new Button();
             BtnPoint = new Button();
             BtnRectangle = new Button();
-            BtnCircle = new Button();
-            BtnRhombus = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,10 +46,9 @@
             // 
             canvasPanel.BackColor = Color.White;
             canvasPanel.BorderStyle = BorderStyle.FixedSingle;
-            canvasPanel.Location = new Point(11, 36);
-            canvasPanel.Margin = new Padding(3, 4, 3, 4);
+            canvasPanel.Location = new Point(10, 27);
             canvasPanel.Name = "canvasPanel";
-            canvasPanel.Size = new Size(914, 643);
+            canvasPanel.Size = new Size(800, 483);
             canvasPanel.TabIndex = 0;
             canvasPanel.Paint += CanvasPanel_Paint;
             canvasPanel.MouseDown += CanvasPanel_MouseDown;
@@ -59,10 +56,9 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(14, 688);
-            btnClear.Margin = new Padding(3, 4, 3, 4);
+            btnClear.Location = new Point(12, 516);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(86, 33);
+            btnClear.Size = new Size(75, 25);
             btnClear.TabIndex = 0;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
@@ -70,12 +66,10 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(938, 30);
+            menuStrip1.Size = new Size(821, 24);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -83,36 +77,35 @@
             // 
             fileToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, saveAsToolStripMenuItem, openToolStripMenuItem });
             fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            fileToolStripMenuItem1.Size = new Size(46, 24);
+            fileToolStripMenuItem1.Size = new Size(37, 20);
             fileToolStripMenuItem1.Text = "File";
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(141, 26);
+            saveToolStripMenuItem.Size = new Size(112, 22);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(141, 26);
+            saveAsToolStripMenuItem.Size = new Size(112, 22);
             saveAsToolStripMenuItem.Text = "Save as";
             saveAsToolStripMenuItem.Click += SaveAsToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(141, 26);
+            openToolStripMenuItem.Size = new Size(112, 22);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
             // 
             // BtnLine
             // 
-            BtnLine.Location = new Point(199, 688);
-            BtnLine.Margin = new Padding(3, 4, 3, 4);
+            BtnLine.Location = new Point(174, 516);
             BtnLine.Name = "BtnLine";
-            BtnLine.Size = new Size(86, 33);
+            BtnLine.Size = new Size(75, 25);
             BtnLine.TabIndex = 4;
             BtnLine.Text = "Line";
             BtnLine.UseVisualStyleBackColor = true;
@@ -120,10 +113,9 @@
             // 
             // BtnPoint
             // 
-            BtnPoint.Location = new Point(106, 688);
-            BtnPoint.Margin = new Padding(3, 4, 3, 4);
+            BtnPoint.Location = new Point(93, 516);
             BtnPoint.Name = "BtnPoint";
-            BtnPoint.Size = new Size(86, 33);
+            BtnPoint.Size = new Size(75, 25);
             BtnPoint.TabIndex = 5;
             BtnPoint.Text = "Point";
             BtnPoint.UseVisualStyleBackColor = true;
@@ -131,44 +123,19 @@
             // 
             // BtnRectangle
             // 
-            BtnRectangle.Location = new Point(291, 688);
-            BtnRectangle.Margin = new Padding(3, 4, 3, 4);
+            BtnRectangle.Location = new Point(255, 516);
             BtnRectangle.Name = "BtnRectangle";
-            BtnRectangle.Size = new Size(86, 33);
+            BtnRectangle.Size = new Size(75, 25);
             BtnRectangle.TabIndex = 6;
             BtnRectangle.Text = "Rectangle";
             BtnRectangle.UseVisualStyleBackColor = true;
             BtnRectangle.Click += BtnRectangle_Click;
             // 
-            // BtnCircle
-            // 
-            BtnCircle.Location = new Point(384, 688);
-            BtnCircle.Margin = new Padding(3, 4, 3, 4);
-            BtnCircle.Name = "BtnCircle";
-            BtnCircle.Size = new Size(86, 33);
-            BtnCircle.TabIndex = 7;
-            BtnCircle.Text = "Circle";
-            BtnCircle.UseVisualStyleBackColor = true;
-            BtnCircle.Click += BtnCircle_Click;
-            // 
-            // BtnRhombus
-            // 
-            BtnRhombus.Location = new Point(476, 688);
-            BtnRhombus.Margin = new Padding(3, 4, 3, 4);
-            BtnRhombus.Name = "BtnRhombus";
-            BtnRhombus.Size = new Size(86, 33);
-            BtnRhombus.TabIndex = 8;
-            BtnRhombus.Text = "Rhombus";
-            BtnRhombus.UseVisualStyleBackColor = true;
-            BtnRhombus.Click += BtnRhombus_Click;
-            // 
             // MainWindow
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(938, 737);
-            Controls.Add(BtnRhombus);
-            Controls.Add(BtnCircle);
+            ClientSize = new Size(821, 553);
             Controls.Add(BtnRectangle);
             Controls.Add(BtnPoint);
             Controls.Add(BtnLine);
@@ -178,7 +145,6 @@
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 4, 3, 4);
             Name = "MainWindow";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Drawing App";
@@ -200,7 +166,5 @@
         private Button BtnLine;
         private Button BtnPoint;
         private Button BtnRectangle;
-        private Button BtnCircle;
-        private Button BtnRhombus;
     }
 }
