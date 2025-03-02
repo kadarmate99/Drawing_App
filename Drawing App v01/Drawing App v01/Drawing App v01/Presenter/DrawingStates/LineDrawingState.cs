@@ -29,15 +29,6 @@ namespace Drawing_App_v01.Presenter.DrawingStates
             }
         }
 
-        public override void HandleMouseMove(MainWindowPresenter presenter, DrawingModel model, int x, int y)
-        {
-            if (_isDrawing)
-            {
-                _currentPoint = new Node(x,y);
-                presenter.View.InvalidateCanvas();
-            }
-        }
-
         public override void TemporaryDraw(Graphics g)
         {
             if (_isDrawing && _startPoint != null && _currentPoint != null)

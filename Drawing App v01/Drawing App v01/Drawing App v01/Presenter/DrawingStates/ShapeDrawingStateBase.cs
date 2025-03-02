@@ -16,7 +16,14 @@ namespace Drawing_App_v01.Presenter.DrawingStates
 
         public abstract void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y);
 
-        public abstract void HandleMouseMove(MainWindowPresenter presenter, DrawingModel model, int x, int y);
+        public void HandleMouseMove(MainWindowPresenter presenter, DrawingModel model, int x, int y)
+        {
+            if (_isDrawing)
+            {
+                _currentPoint = new Node(x, y);
+                presenter.View.InvalidateCanvas();
+            }
+        }
 
         public abstract void TemporaryDraw(Graphics g);
     }

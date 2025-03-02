@@ -4,10 +4,9 @@ using Drawing_App_v01.Presenter.Commands;
 
 namespace Drawing_App_v01.Presenter.DrawingStates
 {
-    public class RectangleDrawingState : ShapeDrawingStateBase
+    internal class CircleDrawingState : ShapeDrawingStateBase
     {
-        public RectangleDrawingState() : base() { }
-
+        public CircleDrawingState() : base() { }
         public override void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (!_isDrawing)
@@ -17,7 +16,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
             }
             else
             {
-                IDrawingCommand drawCommand = new DrawRectangleCommand(_startPoint);
+                IDrawingCommand drawCommand = new DrawCircleCommand(_startPoint);
                 drawCommand.Execute(model, x, y);
                 presenter.View.InvalidateCanvas();
                 _isDrawing = false;
@@ -28,8 +27,8 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         {
             if (_isDrawing && _startPoint != null && _currentPoint != null)
             {
-                ShapeRectangle rectangle = new ShapeRectangle(_startPoint, _currentPoint);
-                rectangle.Draw(g);
+                ShapeCircle circle = new ShapeCircle(_startPoint, _currentPoint);
+               circle.Draw(g);
             }
         }
     }
