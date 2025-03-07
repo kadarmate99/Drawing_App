@@ -17,6 +17,7 @@ namespace Drawing_App_v01.Presenter
         private readonly DrawingModel _drawingModel;
         private MainWindow _view;
         private IDrawingState _currentDrawingState;
+        private Color _currentColor = Color.Black;
 
         //-----------------------------------------------------------------------------
         //Properties 
@@ -70,27 +71,27 @@ namespace Drawing_App_v01.Presenter
         //- - - - -  Button click related events  - - - - -
         internal void OnBtnPoint_Click()
         {
-            _currentDrawingState = new NodeDrawingState(_drawingModel.CurrentColor);
+            _currentDrawingState = new NodeDrawingState(_currentColor);
         }
         internal void OnBtnLine_Click()
         {
-            _currentDrawingState = new LineDrawingState(_drawingModel.CurrentColor);
+            _currentDrawingState = new LineDrawingState(_currentColor);
         }
         internal void OnBtnRectangle_Click()
         {
-            _currentDrawingState = new RectangleDrawingState(_drawingModel.CurrentColor);
+            _currentDrawingState = new RectangleDrawingState(_currentColor);
         }
         internal void OnBtnCircle_Click()
         {
-            _currentDrawingState = new CircleDrawingState(_drawingModel.CurrentColor);
+            _currentDrawingState = new CircleDrawingState(_currentColor);
         }
         internal void BtnRhombus_Click()
         {
-            _currentDrawingState = new RhombusDrawingState(_drawingModel.CurrentColor);
+            _currentDrawingState = new RhombusDrawingState(_currentColor);
         }
         internal void OnBtnClear_Click()
         {
-            _drawingModel.ClearSahpes();
+            _drawingModel.ClearShapes();
             _view.InvalidateCanvas();
         }
 
@@ -105,7 +106,7 @@ namespace Drawing_App_v01.Presenter
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 _view.ColorPanel.BackColor = cd.Color;
-                _drawingModel.CurrentColor = cd.Color; // Update the current color in the model
+                _currentColor = cd.Color;
             }
         }
         
@@ -157,7 +158,7 @@ namespace Drawing_App_v01.Presenter
                 try
                 {
                     List<ShapeBase> shapes = fileSerializationService.LoadDrawingFromFile(filePath);
-                    _drawingModel.ClearSahpes(); // Clear existing shapes
+                    _drawingModel.ClearShapes(); // Clear existing shapes
                     foreach (var shape in shapes)
                     {
                         _drawingModel.AddShape(shape);

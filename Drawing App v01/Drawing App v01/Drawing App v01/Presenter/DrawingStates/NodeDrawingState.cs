@@ -8,11 +8,11 @@ namespace Drawing_App_v01.Presenter.DrawingStates
     /// </summary>
     public class NodeDrawingState : IDrawingState
     {
-        protected Color _currentColor;
+        private readonly Color _currentColor;
 
-        public NodeDrawingState(Color color)
+        public NodeDrawingState(Color currentColor)
         {
-            _currentColor = color;
+            _currentColor = currentColor;
         }
 
         public void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)

@@ -9,7 +9,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         protected Node _startPoint;
         protected Node _currentPoint;
         protected bool _isDrawing;
-        protected Color _currentColor;
+        protected readonly Color _currentColor;
 
         public ShapeDrawingStateBase(Color currentColor)
         {
