@@ -70,29 +70,45 @@ namespace Drawing_App_v01.Presenter
         //- - - - -  Button click related events  - - - - -
         internal void OnBtnPoint_Click()
         {
-            _currentDrawingState = new NodeDrawingState();
+            _currentDrawingState = new NodeDrawingState(_drawingModel.CurrentColor);
         }
         internal void OnBtnLine_Click()
         {
-            _currentDrawingState = new LineDrawingState();
+            _currentDrawingState = new LineDrawingState(_drawingModel.CurrentColor);
         }
         internal void OnBtnRectangle_Click()
         {
-            _currentDrawingState = new RectangleDrawingState();
+            _currentDrawingState = new RectangleDrawingState(_drawingModel.CurrentColor);
         }
         internal void OnBtnCircle_Click()
         {
-            _currentDrawingState = new CircleDrawingState();
+            _currentDrawingState = new CircleDrawingState(_drawingModel.CurrentColor);
         }
         internal void BtnRhombus_Click()
         {
-            _currentDrawingState = new RhombusDrawingState();
+            _currentDrawingState = new RhombusDrawingState(_drawingModel.CurrentColor);
         }
         internal void OnBtnClear_Click()
         {
             _drawingModel.ClearSahpes();
             _view.InvalidateCanvas();
         }
+
+        //- - - - -  Drawing object property setters (color, line width)  - - - - -
+        internal void ColorPanel_DoubleClick()
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.AllowFullOpen = true;
+            cd.Color = _view.ColorPanel.BackColor;
+            cd.AnyColor = true;
+            cd.FullOpen = true;
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                _view.ColorPanel.BackColor = cd.Color;
+                _drawingModel.CurrentColor = cd.Color; // Update the current color in the model
+            }
+        }
+        
 
         //- - - - -  Strip Menu click related events  - - - - -
         internal void OnOpenToolStripMenuItem_Click()

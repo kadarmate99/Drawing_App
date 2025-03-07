@@ -6,17 +6,17 @@ namespace Drawing_App_v01.Presenter.DrawingStates
 {
     internal class CircleDrawingState : ShapeDrawingStateBase
     {
-        public CircleDrawingState() : base() { }
+        public CircleDrawingState(Color currentColor) : base(currentColor) { }
         public override void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (!_isDrawing)
             {
-                _startPoint = new Node(x, y);
+                _startPoint = new Node(_currentColor, x, y);
                 _isDrawing = true;
             }
             else
             {
-                IDrawingCommand drawCommand = new DrawCircleCommand(_startPoint);
+                IDrawingCommand drawCommand = new DrawCircleCommand(_currentColor, _startPoint);
                 drawCommand.Execute(model, x, y);
                 presenter.View.InvalidateCanvas();
                 _isDrawing = false;
@@ -27,7 +27,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         {
             if (_isDrawing && _startPoint != null && _currentPoint != null)
             {
-                ShapeCircle circle = new ShapeCircle(_startPoint, _currentPoint);
+                ShapeCircle circle = new ShapeCircle(_currentColor, _startPoint, _currentPoint);
                circle.Draw(g);
             }
         }

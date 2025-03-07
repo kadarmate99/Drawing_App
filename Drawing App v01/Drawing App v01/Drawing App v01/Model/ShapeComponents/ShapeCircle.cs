@@ -14,13 +14,14 @@ namespace Drawing_App_v01.Model.ShapeComponents
         public Node RadiusPoint { get; set; }
         public int Radius { get; set; }
 
-        public ShapeCircle(Node centerPoint, Node radiusPoint, int lineWeight = 1, Color? color = null)
+
+        public ShapeCircle(Color shapeColor, Node centerPoint, Node radiusPoint, int lineWeight = 1)
         {
             CenterPoint = centerPoint;
             RadiusPoint = radiusPoint;
             RadiusSetter();
             ShapeLineWeight = lineWeight;
-            ShapeColor = color ?? Color.Black; // Default to Black if no color is provided
+            ShapeColor = shapeColor;
         }
 
         [JsonConstructor]
@@ -28,7 +29,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
 
         public override void Draw(Graphics g)
         {
-            using (Pen pen = new Pen(Color.Black, ShapeLineWeight))
+            using (Pen pen = new Pen(ShapeColor, ShapeLineWeight))
             {
                 g.DrawEllipse(pen, CenterPoint.X - Radius, CenterPoint.Y - Radius, Radius * 2, Radius * 2);
             }

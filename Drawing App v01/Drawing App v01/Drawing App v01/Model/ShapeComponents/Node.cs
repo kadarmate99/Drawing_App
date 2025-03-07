@@ -7,12 +7,12 @@ namespace Drawing_App_v01.Model.ShapeComponents
         public int X { get; set; }
         public int Y { get; set; }
 
-        public Node(int x, int y, int size = 5, Color? color = null)
+        public Node(Color shapeColor, int x, int y, int size = 5)
         {
             X = x;
             Y = y;
             ShapeLineWeight = size;
-            ShapeColor = color ?? Color.Black; // Default to Black if no color is provided
+            ShapeColor = shapeColor;
         }
 
         [JsonConstructor]

@@ -28,7 +28,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public ShapeRectangle(Node point_01, Node point_02, int lineWeight = 1, Color? color = null)
+        public ShapeRectangle(Color shapeColor, Node point_01, Node point_02, int lineWeight = 1)
         {
             CornerPoint_01 = new Node();
             CornerPoint_02 = new Node();
@@ -36,7 +36,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
             CornerPoint_04 = new Node();
             RectanglePropertySetter(point_01, point_02);
             ShapeLineWeight = lineWeight;
-            ShapeColor = color ?? Color.Black; // Default to Black if no color is provided
+            ShapeColor = shapeColor;
         }
 
         [JsonConstructor]
@@ -44,7 +44,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
 
         public override void Draw(Graphics g)
         {
-            using (Pen pen = new Pen(Color.Black, ShapeLineWeight))
+            using (Pen pen = new Pen(ShapeColor, ShapeLineWeight))
             {
                 g.DrawRectangle(pen, CornerPoint_01.X, CornerPoint_01.Y, Width, Height );
             }

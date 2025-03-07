@@ -11,6 +11,8 @@ namespace Drawing_App_v01.Model
 
         public string FilePath { get; private set; }
 
+        public Color CurrentColor { get; set; } = Color.Black; //Default color is black
+
         public DrawingModel()
         {
             Shapes = new List<ShapeBase>();

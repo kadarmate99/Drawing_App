@@ -31,7 +31,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         /// </summary>
         public bool IsValid { get; private set; } = true;
 
-        public ShapeRhombus(Node centerPoint, Node cornerPoint, int lineWeight = 1, Color? color = null)
+        public ShapeRhombus(Color shapeColor, Node centerPoint, Node cornerPoint, int lineWeight = 1)
         {
             CenterPoint = centerPoint;
             CornerPoint_01 = new Node();
@@ -40,7 +40,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
             CornerPoint_04 = new Node();
             RhombusPropertySetter(centerPoint, cornerPoint);
             ShapeLineWeight = lineWeight;
-            ShapeColor = color ?? Color.Black; // Default to Black if no color is provided
+            ShapeColor = shapeColor;
         }
 
         [JsonConstructor]
@@ -50,7 +50,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         {
             if (IsValid)
             {
-                using (Pen pen = new Pen(Color.Black, ShapeLineWeight))
+                using (Pen pen = new Pen(ShapeColor, ShapeLineWeight))
                 {
                     g.DrawLines(pen, new Point[]
                     {

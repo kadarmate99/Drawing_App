@@ -11,18 +11,18 @@ namespace Drawing_App_v01.Presenter.DrawingStates
     /// </summary>
     public class LineDrawingState : ShapeDrawingStateBase
     {
-        public LineDrawingState(): base() {}
+        public LineDrawingState(Color currentColor) : base(currentColor) {}
 
         public override void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (!_isDrawing)
             {
-                _startPoint = new Node(x,y);
+                _startPoint = new Node(_currentColor,x, y);
                 _isDrawing = true;
             }
             else
             {
-                IDrawingCommand drawCommand = new DrawLineCommand(_startPoint);
+                IDrawingCommand drawCommand = new DrawLineCommand(_currentColor, _startPoint);
                 drawCommand.Execute(model, x, y);
                 presenter.View.InvalidateCanvas();
                 _isDrawing=false;
@@ -33,7 +33,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         {
             if (_isDrawing && _startPoint != null && _currentPoint != null)
             {
-                ShapeLine line = new ShapeLine(_startPoint, _currentPoint);
+                ShapeLine line = new ShapeLine(_currentColor, _startPoint, _currentPoint);
                 line.Draw(g);
             }
         }

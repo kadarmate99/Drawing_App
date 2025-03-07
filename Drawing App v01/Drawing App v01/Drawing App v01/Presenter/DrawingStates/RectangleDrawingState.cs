@@ -6,18 +6,18 @@ namespace Drawing_App_v01.Presenter.DrawingStates
 {
     public class RectangleDrawingState : ShapeDrawingStateBase
     {
-        public RectangleDrawingState() : base() { }
+        public RectangleDrawingState(Color currentColor) : base(currentColor) { }
 
         public override void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
             if (!_isDrawing)
             {
-                _startPoint = new Node(x, y);
+                _startPoint = new Node(_currentColor, x, y);
                 _isDrawing = true;
             }
             else
             {
-                IDrawingCommand drawCommand = new DrawRectangleCommand(_startPoint);
+                IDrawingCommand drawCommand = new DrawRectangleCommand(_currentColor, _startPoint);
                 drawCommand.Execute(model, x, y);
                 presenter.View.InvalidateCanvas();
                 _isDrawing = false;
@@ -28,7 +28,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         {
             if (_isDrawing && _startPoint != null && _currentPoint != null)
             {
-                ShapeRectangle rectangle = new ShapeRectangle(_startPoint, _currentPoint);
+                ShapeRectangle rectangle = new ShapeRectangle(_currentColor, _startPoint, _currentPoint);
                 rectangle.Draw(g);
             }
         }

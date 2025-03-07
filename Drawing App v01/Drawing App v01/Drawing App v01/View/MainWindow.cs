@@ -1,6 +1,7 @@
 // Description: The primary application window
 
 using System.Windows.Forms;
+using Drawing_App_v01.Model.ShapeComponents;
 using Drawing_App_v01.Presenter;
 
 namespace Drawing_App_v01
@@ -15,6 +16,11 @@ namespace Drawing_App_v01
         public Panel CanvasPanel // Expose the CanvasPanel
         {
             get { return canvasPanel; }
+        }
+
+        public Panel ColorPanel
+        {
+            get { return colorPanel; }
         }
 
         //-----------------------------------------------------------------------------
@@ -76,6 +82,11 @@ namespace Drawing_App_v01
         {
             _presenter.OnBtnClear_Click();
         }
+        //- - - - -  Drawing object property setters (color, line width)  - - - - -
+        private void ColorPanel_DoubleClick(object sender, EventArgs e)
+        {
+            _presenter.ColorPanel_DoubleClick();
+        }
 
         //- - - - -  Strip Menu click related events  - - - - -
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,6 +109,11 @@ namespace Drawing_App_v01
         public void InvalidateCanvas()
         {
             canvasPanel.Invalidate();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

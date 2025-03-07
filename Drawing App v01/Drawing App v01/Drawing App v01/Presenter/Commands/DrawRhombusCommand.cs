@@ -11,17 +11,19 @@ namespace Drawing_App_v01.Presenter.Commands
     internal class DrawRhombusCommand : IDrawingCommand
     {
         private Node _startPoint;
+        private Color _currentColor;
 
-        public DrawRhombusCommand(Node startPoint)
+        public DrawRhombusCommand(Color currentColor, Node startPoint)
         {
             _startPoint = startPoint;
+            _currentColor = currentColor;
         }
 
         public void Execute(DrawingModel model, int x, int y)
         {
             if (_startPoint != null)
             {
-                ShapeRhombus rhombus = new ShapeRhombus(_startPoint, new Node(x, y));
+                ShapeRhombus rhombus = new ShapeRhombus(_currentColor, _startPoint, new Node(_currentColor, x, y));
                 model.AddShape(rhombus);
             }
         }
