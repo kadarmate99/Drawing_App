@@ -17,24 +17,20 @@ namespace Drawing_App_v01.Presenter
         private readonly DrawingModel _drawingModel;
         private MainWindow _view;
         private IDrawingState _currentDrawingState;
-        private Color _currentColor = Color.Black;
-        private int _currentLineWidth = 1;
-        private int _currentNodeSize = 5;
+        private readonly DrawingSettings _drawingSettings = new DrawingSettings();
 
         //-----------------------------------------------------------------------------
         //Properties 
         //-----------------------------------------------------------------------------
 
         //Provide ways for external code to interact with the class safely, rather than directly accessing the fields.
-
-        public MainWindow View
-        { get { return _view; } }
-
+        public MainWindow View => _view;
         public IDrawingState CurrentDrawingState
         {
-            get { return _currentDrawingState; }
-            set { _currentDrawingState = value; }
+            get => _currentDrawingState;
+            set => _currentDrawingState = value;
         }
+        public DrawingSettings DrawingSettings => _drawingSettings;
 
         //-----------------------------------------------------------------------------
         // Constructor  
@@ -73,23 +69,23 @@ namespace Drawing_App_v01.Presenter
         //- - - - -  Button click related events  - - - - -
         internal void OnBtnPoint_Click()
         {
-            _currentDrawingState = new NodeDrawingState(_currentColor, _currentNodeSize);
+            _currentDrawingState = new NodeDrawingState(_drawingSettings);
         }
         internal void OnBtnLine_Click()
         {
-            _currentDrawingState = new LineDrawingState(_currentColor, _currentLineWidth);
+            _currentDrawingState = new LineDrawingState(_drawingSettings);
         }
         internal void OnBtnRectangle_Click()
         {
-            _currentDrawingState = new RectangleDrawingState(_currentColor, _currentLineWidth);
+            _currentDrawingState = new RectangleDrawingState(_drawingSettings);
         }
         internal void OnBtnCircle_Click()
         {
-            _currentDrawingState = new CircleDrawingState(_currentColor, _currentLineWidth);
+            _currentDrawingState = new CircleDrawingState(_drawingSettings);
         }
         internal void BtnRhombus_Click()
         {
-            _currentDrawingState = new RhombusDrawingState(_currentColor, _currentLineWidth);
+            _currentDrawingState = new RhombusDrawingState(_drawingSettings);
         }
         internal void OnBtnClear_Click()
         {
@@ -108,16 +104,16 @@ namespace Drawing_App_v01.Presenter
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 _view.ColorPanel.BackColor = cd.Color;
-                _currentColor = cd.Color;
+                _drawingSettings.DrawingColor = cd.Color;
             }
         }
         internal void OnCmbLineWidth_SelectedIndexChanged(int index)
         {
-            _currentLineWidth = index + 1;
+            _drawingSettings.DrawingLineWidth = index + 1; //Setting line width based on combobox selection, index + 1 is used because box values are concrete and start from 1
         }
         internal void OnCmbNodeSize_SelectedIndexChanged(int index)
         {
-            _currentNodeSize = index + 1;
+            _drawingSettings.DrawingNodeSize = index + 1; //Setting noide size based on combobox selection, index + 1 is used because box values are concrete and start from 1
         }
 
         //- - - - -  Strip Menu click related events  - - - - -

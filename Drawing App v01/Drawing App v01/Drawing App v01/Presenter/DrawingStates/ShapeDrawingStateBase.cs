@@ -9,14 +9,12 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         protected Node _startPoint;
         protected Node _currentPoint;
         protected bool _isDrawing;
-        protected readonly Color _currentColor;
-        protected readonly int _currentLineWidth;
+        protected readonly DrawingSettings _drawingSettings;
 
-        public ShapeDrawingStateBase(Color currentColor, int currentLineWidth)
+        public ShapeDrawingStateBase(DrawingSettings drawingSettings)
         {
             _isDrawing = false;
-            _currentColor = currentColor;
-            _currentLineWidth = currentLineWidth;
+            _drawingSettings = drawingSettings;
         }
 
         public abstract void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y);
@@ -25,7 +23,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         {
             if (_isDrawing)
             {
-                _currentPoint = new Node(_currentColor, x, y);
+                _currentPoint = new Node(_drawingSettings.DrawingColor, x, y);
                 presenter.View.InvalidateCanvas();
             }
         }

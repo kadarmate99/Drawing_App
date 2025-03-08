@@ -8,18 +8,16 @@ namespace Drawing_App_v01.Presenter.DrawingStates
     /// </summary>
     public class NodeDrawingState : IDrawingState
     {
-        private readonly Color _currentColor;
-        private readonly int _currentNodeSize;
+        protected readonly DrawingSettings _drawingSettings;
 
-        public NodeDrawingState(Color currentColor, int currentNodeSize)
+        public NodeDrawingState(DrawingSettings drawingSettings)
         {
-            _currentColor = currentColor;
-            _currentNodeSize = currentNodeSize;
+            _drawingSettings = drawingSettings;
         }
 
         public void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y)
         {
-            IDrawingCommand drawCommand = new DrawNodeCommand(_currentColor, _currentNodeSize);
+            IDrawingCommand drawCommand = new DrawNodeCommand(_drawingSettings.DrawingColor, _drawingSettings.DrawingNodeSize);
             drawCommand.Execute(model, x, y);
             presenter.View.InvalidateCanvas();
         }
