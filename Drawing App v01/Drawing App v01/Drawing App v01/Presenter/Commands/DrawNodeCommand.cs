@@ -11,14 +11,16 @@ namespace Drawing_App_v01.Presenter.Commands
     {
 
         private Color _currentColor;
-        public DrawNodeCommand(Color currentColor)
+        private int _currentNodeSize;
+        public DrawNodeCommand(Color currentColor, int currentNodeSize)
         {
             _currentColor = currentColor;
+            _currentNodeSize = currentNodeSize;
         }
 
         public void Execute(DrawingModel model, int x, int y)
         {
-            Node point = new Node(_currentColor, x, y);
+            Node point = new Node(_currentColor, x, y, _currentNodeSize);
             model.AddShape(point);
         }
     }

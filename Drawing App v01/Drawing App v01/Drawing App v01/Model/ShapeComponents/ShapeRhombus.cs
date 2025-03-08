@@ -31,7 +31,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         /// </summary>
         public bool IsValid { get; private set; } = true;
 
-        public ShapeRhombus(Color shapeColor, Node centerPoint, Node cornerPoint, int lineWeight = 1)
+        public ShapeRhombus(Color shapeColor, Node centerPoint, Node cornerPoint, int lineWeight)
         {
             CenterPoint = centerPoint;
             CornerPoint_01 = new Node();

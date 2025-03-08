@@ -42,6 +42,8 @@
             BtnCircle = new Button();
             BtnRhombus = new Button();
             colorPanel = new Panel();
+            CmbLineWidth = new ComboBox();
+            CmbNodeSize = new ComboBox();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -165,11 +167,35 @@
             colorPanel.TabIndex = 10;
             colorPanel.DoubleClick += ColorPanel_DoubleClick;
             // 
+            // CmbLineWidth
+            // 
+            CmbLineWidth.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbLineWidth.FormattingEnabled = true;
+            CmbLineWidth.Items.AddRange(new object[] { "1", "2", "3", "4", "5" });
+            CmbLineWidth.Location = new Point(612, 518);
+            CmbLineWidth.Name = "CmbLineWidth";
+            CmbLineWidth.Size = new Size(51, 23);
+            CmbLineWidth.TabIndex = 11;
+            CmbLineWidth.SelectedIndexChanged += CmbLineWidth_SelectedIndexChanged;
+            // 
+            // CmbNodeSize
+            // 
+            CmbNodeSize.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbNodeSize.FormattingEnabled = true;
+            CmbNodeSize.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
+            CmbNodeSize.Location = new Point(678, 518);
+            CmbNodeSize.Name = "CmbNodeSize";
+            CmbNodeSize.Size = new Size(51, 23);
+            CmbNodeSize.TabIndex = 12;
+            CmbNodeSize.SelectedIndexChanged += CmbNodeSize_SelectedIndexChanged;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(821, 553);
+            Controls.Add(CmbNodeSize);
+            Controls.Add(CmbLineWidth);
             Controls.Add(colorPanel);
             Controls.Add(BtnRhombus);
             Controls.Add(BtnCircle);
@@ -206,5 +232,7 @@
         private Button BtnCircle;
         private Button BtnRhombus;
         private Panel colorPanel;
+        private ComboBox CmbLineWidth;
+        private ComboBox CmbNodeSize;
     }
 }

@@ -15,7 +15,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         public int Radius { get; set; }
 
 
-        public ShapeCircle(Color shapeColor, Node centerPoint, Node radiusPoint, int lineWeight = 1)
+        public ShapeCircle(Color shapeColor, Node centerPoint, Node radiusPoint, int lineWeight)
         {
             CenterPoint = centerPoint;
             RadiusPoint = radiusPoint;

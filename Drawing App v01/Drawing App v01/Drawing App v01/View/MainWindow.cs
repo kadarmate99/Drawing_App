@@ -31,6 +31,8 @@ namespace Drawing_App_v01
             InitializeComponent();
             _presenter = presenter;
             _presenter.SetView(this); // Give the presenter a reference to the view
+            CmbLineWidth.SelectedIndex = 0;
+            CmbNodeSize.SelectedIndex = 4;
 
             // Enable double buffering for the panel to reduce flickering
             canvasPanel.GetType().GetProperty("DoubleBuffered",
@@ -86,6 +88,16 @@ namespace Drawing_App_v01
         private void ColorPanel_DoubleClick(object sender, EventArgs e)
         {
             _presenter.ColorPanel_DoubleClick();
+        }
+        private void CmbLineWidth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = CmbLineWidth.SelectedIndex;
+            _presenter.OnCmbLineWidth_SelectedIndexChanged(index);
+        }
+        private void CmbNodeSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = CmbNodeSize.SelectedIndex;
+            _presenter.OnCmbNodeSize_SelectedIndexChanged(index);
         }
 
         //- - - - -  Strip Menu click related events  - - - - -

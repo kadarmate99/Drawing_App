@@ -10,11 +10,13 @@ namespace Drawing_App_v01.Presenter.DrawingStates
         protected Node _currentPoint;
         protected bool _isDrawing;
         protected readonly Color _currentColor;
+        protected readonly int _currentLineWidth;
 
-        public ShapeDrawingStateBase(Color currentColor)
+        public ShapeDrawingStateBase(Color currentColor, int currentLineWidth)
         {
             _isDrawing = false;
             _currentColor = currentColor;
+            _currentLineWidth = currentLineWidth;
         }
 
         public abstract void HandleMouseDown(MainWindowPresenter presenter, DrawingModel model, int x, int y);

@@ -10,11 +10,12 @@ namespace Drawing_App_v01.Model.ShapeComponents
         public Node StartingPoint { get; set; }
         public Node EndingPoint { get; set; }
 
-        public ShapeLine(Color shapeColor, Node startingPoint, Node endingPoint)
+        public ShapeLine(Color shapeColor, Node startingPoint, Node endingPoint, int shapeLineWidth)
         {
             ShapeColor = shapeColor;
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
+            ShapeLineWeight = shapeLineWidth;
         }
 
         [JsonConstructor]

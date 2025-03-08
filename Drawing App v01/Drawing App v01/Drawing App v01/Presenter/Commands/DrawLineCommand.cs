@@ -11,17 +11,19 @@ namespace Drawing_App_v01.Presenter.Commands
     {
         private Node _startPoint;
         private Color _currentColor;
-        public DrawLineCommand(Color currentColor, Node startPoint)
+        private int _currnetLineWidth;
+        public DrawLineCommand(Color currentColor, Node startPoint, int currnetLineWidth)
         {
             _startPoint = startPoint;
             _currentColor = currentColor;
+            _currnetLineWidth = currnetLineWidth;
         }
 
         public void Execute(DrawingModel model, int x, int y)
         {
             if (_startPoint != null)
             {
-                ShapeLine line = new ShapeLine(_currentColor, _startPoint, new Node(_currentColor, x, y));
+                ShapeLine line = new ShapeLine(_currentColor, _startPoint, new Node(_currentColor, x, y), _currnetLineWidth);
                 model.AddShape(line);
             }
         }

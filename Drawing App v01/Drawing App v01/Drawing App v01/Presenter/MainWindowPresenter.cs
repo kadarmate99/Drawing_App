@@ -18,6 +18,8 @@ namespace Drawing_App_v01.Presenter
         private MainWindow _view;
         private IDrawingState _currentDrawingState;
         private Color _currentColor = Color.Black;
+        private int _currentLineWidth = 1;
+        private int _currentNodeSize = 5;
 
         //-----------------------------------------------------------------------------
         //Properties 
@@ -71,23 +73,23 @@ namespace Drawing_App_v01.Presenter
         //- - - - -  Button click related events  - - - - -
         internal void OnBtnPoint_Click()
         {
-            _currentDrawingState = new NodeDrawingState(_currentColor);
+            _currentDrawingState = new NodeDrawingState(_currentColor, _currentNodeSize);
         }
         internal void OnBtnLine_Click()
         {
-            _currentDrawingState = new LineDrawingState(_currentColor);
+            _currentDrawingState = new LineDrawingState(_currentColor, _currentLineWidth);
         }
         internal void OnBtnRectangle_Click()
         {
-            _currentDrawingState = new RectangleDrawingState(_currentColor);
+            _currentDrawingState = new RectangleDrawingState(_currentColor, _currentLineWidth);
         }
         internal void OnBtnCircle_Click()
         {
-            _currentDrawingState = new CircleDrawingState(_currentColor);
+            _currentDrawingState = new CircleDrawingState(_currentColor, _currentLineWidth);
         }
         internal void BtnRhombus_Click()
         {
-            _currentDrawingState = new RhombusDrawingState(_currentColor);
+            _currentDrawingState = new RhombusDrawingState(_currentColor, _currentLineWidth);
         }
         internal void OnBtnClear_Click()
         {
@@ -109,7 +111,14 @@ namespace Drawing_App_v01.Presenter
                 _currentColor = cd.Color;
             }
         }
-        
+        internal void OnCmbLineWidth_SelectedIndexChanged(int index)
+        {
+            _currentLineWidth = index + 1;
+        }
+        internal void OnCmbNodeSize_SelectedIndexChanged(int index)
+        {
+            _currentNodeSize = index + 1;
+        }
 
         //- - - - -  Strip Menu click related events  - - - - -
         internal void OnOpenToolStripMenuItem_Click()

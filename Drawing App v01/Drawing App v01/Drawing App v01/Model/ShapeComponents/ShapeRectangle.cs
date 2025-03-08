@@ -28,7 +28,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public ShapeRectangle(Color shapeColor, Node point_01, Node point_02, int lineWeight = 1)
+        public ShapeRectangle(Color shapeColor, Node point_01, Node point_02, int lineWeight)
         {
             CornerPoint_01 = new Node();
             CornerPoint_02 = new Node();
