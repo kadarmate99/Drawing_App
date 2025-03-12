@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Drawing_App_v01.Model;
 using Drawing_App_v01.Model.ShapeComponents;
 using Drawing_App_v01.Presenter.DrawingStates;
+using Drawing_App_v01.View;
 
 namespace Drawing_App_v01.Presenter
 {
@@ -47,6 +50,12 @@ namespace Drawing_App_v01.Presenter
         //- - - - -  CanvasPanel related events  - - - - -
         internal void OnCanvasPanel_Paint(PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Apply transformations before drawing
+            e.Graphics.TranslateTransform(_view.Canvas.Offset.X, _view.Canvas.Offset.Y);
+            e.Graphics.ScaleTransform(_view.Canvas.Zoom, _view.Canvas.Zoom);
+
             _drawingModel.RenderModel(e.Graphics);
 
             if (_currentDrawingState is ShapeDrawingStateBase shapeState)
@@ -56,13 +65,20 @@ namespace Drawing_App_v01.Presenter
         }
         internal void OnCanvasPanel_MouseDown(MouseEventArgs e)
         {
-            _currentDrawingState?.HandleMouseDown(this, _drawingModel, e.X, e.Y);
+            if (e.Button == MouseButtons.Left)
+            {
+                Point worldPoint = _view.Canvas.ScreenToWorld(new Point(e.X, e.Y));
+
+                _currentDrawingState?.HandleMouseDown(this, _drawingModel, worldPoint.X, worldPoint.Y);
+            }
         }
         internal void OnCanvasPanel_MouseMove(MouseEventArgs e)
         {
+            Point worldPoint = _view.Canvas.ScreenToWorld(new Point(e.X, e.Y));
+
             if (_currentDrawingState is ShapeDrawingStateBase shapeState)
             {
-                shapeState?.HandleMouseMove(this, _drawingModel, e.X, e.Y);
+                shapeState?.HandleMouseMove(this, _drawingModel, worldPoint.X, worldPoint.Y);
             }
         }
 
@@ -158,17 +174,28 @@ namespace Drawing_App_v01.Presenter
         {
             if (!string.IsNullOrEmpty(filePath))
             {
-                _drawingModel.SetFilePath(filePath);
-                FileSerializationService fileSerializationService = new FileSerializationService();
                 try
                 {
-                    List<ShapeBase> shapes = fileSerializationService.LoadDrawingFromFile(filePath);
-                    _drawingModel.ClearShapes(); // Clear existing shapes
-                    foreach (var shape in shapes)
+                    FileSerializationService fileSerializationService = new FileSerializationService(); // Create service instance
+                    _drawingModel.SetFilePath(filePath);
+
+                    var loadedModel = fileSerializationService.LoadDrawingFromFile(filePath); // Load model from file
+
+                    // Update the existing _drawingModel instead of replacing it
+                    _drawingModel.ClearShapes();
+                    foreach (var shape in loadedModel.Shapes)
                     {
                         _drawingModel.AddShape(shape);
                     }
-                    _view.InvalidateCanvas();
+
+                    // Apply saved zoom and offset
+                    _drawingModel.SetView(loadedModel.ZoomLevel, loadedModel.ViewOffset);
+                    _view.Canvas.SetView(_drawingModel.ZoomLevel, _drawingModel.ViewOffset);
+
+                    // Update App name with the opened model name
+                    _view.Text = "Drawing App" + " - " + Path.GetFileNameWithoutExtension(_drawingModel.FilePath);
+
+
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -183,8 +210,9 @@ namespace Drawing_App_v01.Presenter
             if (!string.IsNullOrEmpty(filePath))
             {
                 _drawingModel.SetFilePath(filePath);
+                _drawingModel.SetView(_view.Canvas.Zoom, _view.Canvas.Offset);
                 FileSerializationService fileSerializationService = new FileSerializationService();
-                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes);
+                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes, _drawingModel.ZoomLevel, _drawingModel.ViewOffset);
             }
         }
 
@@ -193,8 +221,9 @@ namespace Drawing_App_v01.Presenter
             if (!string.IsNullOrEmpty(filePath))
             {
                 _drawingModel.SetFilePath(filePath);
+                _drawingModel.SetView(_view.Canvas.Zoom, _view.Canvas.Offset);
                 FileSerializationService fileSerializationService = new FileSerializationService();
-                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes);
+                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes, _drawingModel.ZoomLevel, _drawingModel.ViewOffset);
             }
         }
     }

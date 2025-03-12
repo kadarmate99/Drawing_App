@@ -3,6 +3,7 @@
 using System.Windows.Forms;
 using Drawing_App_v01.Model.ShapeComponents;
 using Drawing_App_v01.Presenter;
+using Drawing_App_v01.View;
 
 namespace Drawing_App_v01
 {
@@ -12,16 +13,10 @@ namespace Drawing_App_v01
         // Fields
         //-----------------------------------------------------------------------------
         private readonly MainWindowPresenter _presenter;
+        private readonly CanvasPanel _canvasPanel;
 
-        public Panel CanvasPanel // Expose the CanvasPanel
-        {
-            get { return canvasPanel; }
-        }
-
-        public Panel ColorPanel
-        {
-            get { return colorPanel; }
-        }
+        public CanvasPanel Canvas => _canvasPanel;
+        public Panel ColorPanel => colorPanel;
 
         //-----------------------------------------------------------------------------
         // Constructor  
@@ -31,14 +26,24 @@ namespace Drawing_App_v01
             InitializeComponent();
             _presenter = presenter;
             _presenter.SetView(this); // Give the presenter a reference to the view
+
+            _canvasPanel = new CanvasPanel()
+            {
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle,
+                Location = new Point(10, 27),
+                Name = "_oldCanvasPanel",
+                Size = new Size(813, 413),
+                TabIndex = 0,
+            };
+            Controls.Add(_canvasPanel);
+            _canvasPanel.Paint += CanvasPanel_Paint;
+            _canvasPanel.MouseDown += CanvasPanel_MouseDown;
+            _canvasPanel.MouseMove += CanvasPanel_MouseMove;
+
             CmbLineWidth.SelectedIndex = 0;
             CmbNodeSize.SelectedIndex = 4;
-
-            // Enable double buffering for the panel to reduce flickering
-            canvasPanel.GetType().GetProperty("DoubleBuffered",
-                System.Reflection.BindingFlags.Instance |
-                System.Reflection.BindingFlags.NonPublic)
-                .SetValue(canvasPanel, true, null);
         }
 
         //-----------------------------------------------------------------------------
@@ -120,7 +125,7 @@ namespace Drawing_App_v01
         //-----------------------------------------------------------------------------
         public void InvalidateCanvas()
         {
-            canvasPanel.Invalidate();
+            _canvasPanel.Invalidate();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
