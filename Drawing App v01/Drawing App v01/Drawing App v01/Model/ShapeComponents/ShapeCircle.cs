@@ -22,6 +22,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
             RadiusSetter();
             ShapeLineWeight = lineWeight;
             ShapeColor = shapeColor;
+            ShapeName = "Circle";
         }
 
         [JsonConstructor]
@@ -38,6 +39,12 @@ namespace Drawing_App_v01.Model.ShapeComponents
         private void RadiusSetter()
         {
             Radius = (int)Math.Sqrt(Math.Pow(RadiusPoint.X - CenterPoint.X, 2) + Math.Pow(RadiusPoint.Y - CenterPoint.Y, 2));
+        }
+
+        public override bool IsNear(Point p, int threshold)
+        {
+            double distance = Math.Sqrt(Math.Pow(p.X - CenterPoint.X, 2) + Math.Pow(p.Y - CenterPoint.Y, 2));
+            return Math.Abs(distance - Radius) <= threshold;
         }
     }
 }

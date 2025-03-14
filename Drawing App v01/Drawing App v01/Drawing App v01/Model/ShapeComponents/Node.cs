@@ -13,6 +13,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
             Y = y;
             ShapeLineWeight = size;
             ShapeColor = shapeColor;
+            ShapeName = "Point";
         }
 
         [JsonConstructor]
@@ -24,6 +25,11 @@ namespace Drawing_App_v01.Model.ShapeComponents
             {
                 g.FillRectangle(brush, X - ShapeLineWeight / 2, Y - ShapeLineWeight / 2, ShapeLineWeight, ShapeLineWeight);
             }
+        }
+
+        public override bool IsNear(Point p, int threshold)
+        {
+            return Math.Abs(p.X - X) <= threshold && Math.Abs(p.Y - Y) <= threshold;
         }
     }
 }

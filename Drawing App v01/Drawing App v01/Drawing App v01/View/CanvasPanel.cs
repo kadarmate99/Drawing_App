@@ -14,6 +14,7 @@ namespace Drawing_App_v01.View
 
         public float Zoom => _zoom;
         public PointF Offset => _offset;
+        public bool IsPanning => _isPanning;
 
         public CanvasPanel()
         {
@@ -47,7 +48,7 @@ namespace Drawing_App_v01.View
             {
                 _isPanning = true;
                 _lastMousePosition = e.Location;
-                Cursor = Cursors.Hand;
+                Cursor = Cursors.SizeAll;
             }
         }
         // Moves the canvas while panning

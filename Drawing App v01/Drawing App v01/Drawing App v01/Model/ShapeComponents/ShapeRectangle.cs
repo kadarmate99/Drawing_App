@@ -27,6 +27,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         public Node CornerPoint_04 { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        
 
         public ShapeRectangle(Color shapeColor, Node point_01, Node point_02, int lineWeight)
         {
@@ -37,6 +38,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
             RectanglePropertySetter(point_01, point_02);
             ShapeLineWeight = lineWeight;
             ShapeColor = shapeColor;
+            ShapeName = "Rectangle";
         }
 
         [JsonConstructor]
@@ -85,6 +87,15 @@ namespace Drawing_App_v01.Model.ShapeComponents
 
             CornerPoint_04.X = CornerPoint_01.X;
             CornerPoint_04.Y = CornerPoint_01.Y + Height;
+        }
+
+        public override bool IsNear(Point p, int threshold)
+        {
+            return
+                DistanceToLine(CornerPoint_01, CornerPoint_02, p) <= threshold ||
+                DistanceToLine(CornerPoint_02, CornerPoint_03, p) <= threshold ||
+                DistanceToLine(CornerPoint_03, CornerPoint_04, p) <= threshold ||
+                DistanceToLine(CornerPoint_04, CornerPoint_01, p) <= threshold;
         }
     }
 }

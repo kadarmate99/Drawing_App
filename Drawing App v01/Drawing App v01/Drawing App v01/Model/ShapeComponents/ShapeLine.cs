@@ -16,6 +16,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
             ShapeLineWeight = shapeLineWidth;
+            ShapeName = "Line";
         }
 
         [JsonConstructor]
@@ -29,5 +30,9 @@ namespace Drawing_App_v01.Model.ShapeComponents
             }
         }
 
+        public override bool IsNear(Point p, int threshold)
+        {
+            return DistanceToLine(StartingPoint, EndingPoint, p) <= threshold;
+        }
     }
 }

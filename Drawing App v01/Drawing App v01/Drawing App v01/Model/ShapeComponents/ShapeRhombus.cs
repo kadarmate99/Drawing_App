@@ -41,6 +41,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
             RhombusPropertySetter(centerPoint, cornerPoint);
             ShapeLineWeight = lineWeight;
             ShapeColor = shapeColor;
+            ShapeName = "Rhombus";
         }
 
         [JsonConstructor]
@@ -154,5 +155,14 @@ namespace Drawing_App_v01.Model.ShapeComponents
                 CornerPoint_03.X = CornerPoint_04.X - cornerDiffX;
             }
         }
-    }
+
+        public override bool IsNear(Point p, int threshold)
+        {
+            return
+                DistanceToLine(CornerPoint_01, CornerPoint_02, p) <= threshold ||
+                DistanceToLine(CornerPoint_02, CornerPoint_03, p) <= threshold ||
+                DistanceToLine(CornerPoint_03, CornerPoint_04, p) <= threshold ||
+                DistanceToLine(CornerPoint_04, CornerPoint_01, p) <= threshold;
+        }
+    }    
 }

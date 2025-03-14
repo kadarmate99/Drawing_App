@@ -21,6 +21,7 @@ namespace Drawing_App_v01.Presenter
         private MainWindow _view;
         private IDrawingState _currentDrawingState;
         private readonly DrawingSettings _drawingSettings = new DrawingSettings();
+        private ToolTip toolTip = new ToolTip();
 
         //-----------------------------------------------------------------------------
         //Properties 
@@ -79,6 +80,29 @@ namespace Drawing_App_v01.Presenter
             if (_currentDrawingState is ShapeDrawingStateBase shapeState)
             {
                 shapeState?.HandleMouseMove(this, _drawingModel, worldPoint.X, worldPoint.Y);
+            }
+
+            if (!_view.Canvas.IsPanning) // This if prevents the cursor to default reset during panning
+            {
+                foreach (var shape in _drawingModel.Shapes)
+                {
+                    if (shape.IsNear(worldPoint, 5)) // Check if the mouse is close to a shape
+                    {
+
+                        // Show the tooltip for the first time
+                        toolTip.Show(shape.ShapeName, _view.Canvas, e.X + 15, e.Y + 15); // Small offset to avoid overlap
+
+                        // Change cursor when hovering over a shape
+                        _view.Canvas.Cursor = Cursors.Hand;
+                        return;
+                    }
+                }
+
+                toolTip.Hide(_view.Canvas); // Hide tooltip if no shape is near
+
+
+                // Reset the cursor if not hovering over a shape
+                _view.Canvas.Cursor = Cursors.Default;
             }
         }
 
