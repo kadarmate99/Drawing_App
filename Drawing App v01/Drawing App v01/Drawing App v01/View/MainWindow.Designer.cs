@@ -46,6 +46,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            editUserDataToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,7 +74,7 @@
             // 
             // fileToolStripMenuItem1
             // 
-            fileToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, saveAsToolStripMenuItem, openToolStripMenuItem });
+            fileToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, saveAsToolStripMenuItem, openToolStripMenuItem, editUserDataToolStripMenuItem });
             fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
             fileToolStripMenuItem1.Size = new Size(37, 20);
             fileToolStripMenuItem1.Text = "File";
@@ -81,21 +82,21 @@
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(112, 22);
+            saveToolStripMenuItem.Size = new Size(180, 22);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(112, 22);
+            saveAsToolStripMenuItem.Size = new Size(180, 22);
             saveAsToolStripMenuItem.Text = "Save as";
             saveAsToolStripMenuItem.Click += SaveAsToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(112, 22);
+            openToolStripMenuItem.Size = new Size(180, 22);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
             // 
@@ -218,6 +219,13 @@
             label3.TabIndex = 15;
             label3.Text = "Point size:";
             // 
+            // editUserDataToolStripMenuItem
+            // 
+            editUserDataToolStripMenuItem.Name = "editUserDataToolStripMenuItem";
+            editUserDataToolStripMenuItem.Size = new Size(180, 22);
+            editUserDataToolStripMenuItem.Text = "Edit User Data";
+            editUserDataToolStripMenuItem.Click += editUserDataToolStripMenuItem_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -265,5 +273,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private ToolStripMenuItem editUserDataToolStripMenuItem;
     }
 }

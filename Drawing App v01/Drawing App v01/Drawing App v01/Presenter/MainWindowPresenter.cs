@@ -172,6 +172,11 @@ namespace Drawing_App_v01.Presenter
             SaveAsFile(filePath);
         }
 
+        internal void OnEditUserDataToolStripMenuItem_Click()
+        {
+            ShowUserDataForm();
+        }
+
         //- - - - -  WelcomeForm related events  - - - - -
         internal void OnFileSelectedToOpen(object sender, string filePath)
         {
@@ -200,20 +205,16 @@ namespace Drawing_App_v01.Presenter
             {
                 try
                 {
-                    FileSerializationService fileSerializationService = new FileSerializationService(); // Create service instance
+                    FileSerializationService fileSerializationService = new FileSerializationService();
                     _drawingModel.SetFilePath(filePath);
 
-                    var loadedModel = fileSerializationService.LoadDrawingFromFile(filePath); // Load model from file
+                    // Load model from file
+                    var loadedModel = fileSerializationService.LoadDrawingFromFile(filePath);
 
-                    // Update the existing _drawingModel instead of replacing it
-                    _drawingModel.ClearShapes();
-                    foreach (var shape in loadedModel.Shapes)
-                    {
-                        _drawingModel.AddShape(shape);
-                    }
+                    // Update the existing _drawingModel
+                    _drawingModel.ImportDataFrom(loadedModel);
 
                     // Apply saved zoom and offset
-                    _drawingModel.SetView(loadedModel.ZoomLevel, loadedModel.ViewOffset);
                     _view.Canvas.SetView(_drawingModel.ZoomLevel, _drawingModel.ViewOffset);
 
                     // Update App name with the opened model name
@@ -236,7 +237,7 @@ namespace Drawing_App_v01.Presenter
                 _drawingModel.SetFilePath(filePath);
                 _drawingModel.SetView(_view.Canvas.Zoom, _view.Canvas.Offset);
                 FileSerializationService fileSerializationService = new FileSerializationService();
-                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes, _drawingModel.ZoomLevel, _drawingModel.ViewOffset);
+                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel);
             }
         }
 
@@ -247,8 +248,28 @@ namespace Drawing_App_v01.Presenter
                 _drawingModel.SetFilePath(filePath);
                 _drawingModel.SetView(_view.Canvas.Zoom, _view.Canvas.Offset);
                 FileSerializationService fileSerializationService = new FileSerializationService();
-                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel.Shapes, _drawingModel.ZoomLevel, _drawingModel.ViewOffset);
+                fileSerializationService.SaveDrawingToFile(filePath, _drawingModel);
+                // Update App name with the opened model name
+                _view.Text = "Drawing App" + " - " + Path.GetFileNameWithoutExtension(_drawingModel.FilePath);
             }
         }
+
+
+        public void ShowUserDataForm()
+        {
+            var userDataPresenter = new UserDataPresenter(_drawingModel);
+            using (var userDataForm = new UserDataForm(userDataPresenter))
+            {
+                userDataForm.LoadUserData(_drawingModel);
+
+                if (userDataForm.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("User data saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        
     }
 }
+

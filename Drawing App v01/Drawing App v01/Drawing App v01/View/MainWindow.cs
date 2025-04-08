@@ -25,7 +25,7 @@ namespace Drawing_App_v01
         {
             InitializeComponent();
             _presenter = presenter;
-            _presenter.SetView(this); // Give the presenter a reference to the view
+            _presenter.SetView(this); // Give the presenter a reference to the form
 
             _canvasPanel = new CanvasPanel()
             {
@@ -120,6 +120,11 @@ namespace Drawing_App_v01
             _presenter.OnSaveAsToolStripMenuItem_Click();
         }
 
+        private void editUserDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _presenter.OnEditUserDataToolStripMenuItem_Click();
+        }
+
         //-----------------------------------------------------------------------------
         // Methods
         //-----------------------------------------------------------------------------
@@ -132,5 +137,6 @@ namespace Drawing_App_v01
         {
 
         }
+
     }
 }

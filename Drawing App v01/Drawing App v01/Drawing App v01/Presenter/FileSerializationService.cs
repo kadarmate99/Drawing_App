@@ -16,7 +16,7 @@ namespace Drawing_App_v01.Presenter
         };
 
         public DrawingModel LoadDrawingFromFile(string filePath)
-        { 
+        {
             if (File.Exists(filePath))
             {
                 try
@@ -28,6 +28,9 @@ namespace Drawing_App_v01.Presenter
 
                     // Load View settings
                     drawingModel.SetView((float)loadData.ZoomLevel, new PointF((float)loadData.ViewOffset.X, (float)loadData.ViewOffset.Y));
+
+                    //Load User Data
+                    drawingModel.UserData = JsonConvert.DeserializeObject<UserData>(loadData.UserData.ToString());
 
                     // Load Shapes
                     foreach (var shapeData in loadData.Shapes)
@@ -59,16 +62,17 @@ namespace Drawing_App_v01.Presenter
                 return new DrawingModel();
             }
 
-            
+
         }
 
-        public void SaveDrawingToFile(string filePath, List<ShapeBase> shapes, float zoomLevel, PointF viewOffset )
+        public void SaveDrawingToFile(string filePath, DrawingModel model)
         {
             var saveData = new
             {
-                Shapes = shapes,
-                ZoomLevel = zoomLevel,
-                ViewOffset = viewOffset
+                Shapes = model.Shapes,
+                ZoomLevel = model.ZoomLevel,
+                ViewOffset = model.ViewOffset,
+                UserData = model.UserData
             };
 
             string jsonData = JsonConvert.SerializeObject(saveData, _jsonSerializerSettings);

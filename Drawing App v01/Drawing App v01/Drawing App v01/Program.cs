@@ -1,5 +1,6 @@
 using Drawing_App_v01.Model;
 using Drawing_App_v01.Presenter;
+using Drawing_App_v01.View;
 
 namespace Drawing_App_v01
 {
@@ -14,27 +15,25 @@ namespace Drawing_App_v01
 
             ApplicationConfiguration.Initialize();
 
-
-            // Create Main Window (disabled at first)
-
             // Create dependencies
             DrawingModel drawingModel = new DrawingModel();
             MainWindowPresenter mainWindowPresenter = new MainWindowPresenter(drawingModel);
             MainWindow mainWindow = new MainWindow(mainWindowPresenter);
 
-            // Diable Main Window on opening
+            // Diable Main Window initially
             mainWindow.Enabled = false;
             mainWindow.Show();
 
-            // Open Welcome Form on opening
+            // Open Welcome Form
             using (WelcomeForm welcomeForm = new WelcomeForm())
             {
-                // Subscribe to the Load event inside mainWindow
+                // Subscribe to the File Open/Create event inside mainWindow
                 welcomeForm.FileSelectedToOpen += mainWindowPresenter.OnFileSelectedToOpen;
                 welcomeForm.FileSelectedToCreate += mainWindowPresenter.OnFileSelectedToCreate;
 
                 if (welcomeForm.ShowDialog() == DialogResult.OK)
                 {
+                    mainWindowPresenter.ShowUserDataForm();
                     // Enable Main Window once file is selected
                     mainWindow.Enabled = true;
                 }
@@ -44,8 +43,8 @@ namespace Drawing_App_v01
                     mainWindow.Close();
                     return;
                 }
-                
-                // maybe here should unsubsribe from FileSelectedToLoad
+
+                //unsubsribe from File Open/Create event
                 welcomeForm.FileSelectedToOpen -= mainWindowPresenter.OnFileSelectedToOpen;
                 welcomeForm.FileSelectedToCreate -= mainWindowPresenter.OnFileSelectedToCreate;
             }
