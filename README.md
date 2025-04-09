@@ -60,21 +60,6 @@ This is the first somewhat larger project I’ve done. I used **C#** to build a 
 
 ---
 
-## How to Run
-
-1. Clone this repository.
-   ```bash
-   git clone https://github.com/yourusername/drawing-app.git
-   cd drawing-app
-   ```
-2. Open the project in Visual Studio.
-3. Build and run the solution.
-4. Explore the app's features:
-   - Start a **new drawing** or **load an existing file** from the welcome screen.
-   - Use the toolbar to draw shapes, customize settings, and manage your workspace.
-
----
-
 ## Known Issues
 1. **Code Organization**:
     - Some classes are overloaded with logic, breaking the **single responsibility principle** (e.g., handling UI, business logic, and event handling in one place).
