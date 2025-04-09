@@ -6,8 +6,7 @@ namespace Drawing_App_v01.Presenter.DrawingStates
 
 {
     /// <summary>
-    /// Implements IDrawingState to handle drawing lines.
-    /// Uses DrawLineCommand to draw a line.
+    /// Drawing state for creating lines between two points.
     /// </summary>
     public class LineDrawingState : ShapeDrawingStateBase
     {

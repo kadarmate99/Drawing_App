@@ -1,5 +1,3 @@
-// Description: The primary application window
-
 using System.Windows.Forms;
 using Drawing_App_v01.Model.ShapeComponents;
 using Drawing_App_v01.Presenter;
@@ -7,6 +5,10 @@ using Drawing_App_v01.View;
 
 namespace Drawing_App_v01
 {
+    /// <summary>
+    /// The primary application window containing the drawing canvas and UI controls for 
+    /// shape selection, styling options, and file operations.
+    /// </summary>
     public partial class MainWindow : Form
     {
         //-----------------------------------------------------------------------------
@@ -128,6 +130,10 @@ namespace Drawing_App_v01
         //-----------------------------------------------------------------------------
         // Methods
         //-----------------------------------------------------------------------------
+        
+        /// <summary>
+        /// Invalidates the drawing canvas, forcing a redraw of all shapes.
+        /// </summary>
         public void InvalidateCanvas()
         {
             _canvasPanel.Invalidate();

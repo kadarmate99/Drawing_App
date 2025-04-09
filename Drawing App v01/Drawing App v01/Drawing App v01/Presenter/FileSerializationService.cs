@@ -7,6 +7,9 @@ using Drawing_App_v01.Model;
 
 namespace Drawing_App_v01.Presenter
 {
+    /// <summary>
+    /// Handles serialization and deserialization of the drawing model to and from JSON files.
+    /// </summary>
     public class FileSerializationService
     {
         private readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings()
@@ -15,6 +18,11 @@ namespace Drawing_App_v01.Presenter
             Formatting = Formatting.Indented
         };
 
+        /// <summary>
+        /// Loads a drawing from a JSON file.
+        /// </summary>
+        /// <param name="filePath">The path to the file to load.</param>
+        /// <returns>A populated DrawingModel, or a new empty model if loading fails.</returns>
         public DrawingModel LoadDrawingFromFile(string filePath)
         {
             if (File.Exists(filePath))
@@ -65,6 +73,11 @@ namespace Drawing_App_v01.Presenter
 
         }
 
+        /// <summary>
+        /// Saves a drawing model to a JSON file.
+        /// </summary>
+        /// <param name="filePath">The path where the file should be saved.</param>
+        /// <param name="model">The drawing model to save.</param>
         public void SaveDrawingToFile(string filePath, DrawingModel model)
         {
             var saveData = new

@@ -12,6 +12,10 @@ using Drawing_App_v01.View;
 
 namespace Drawing_App_v01.Presenter
 {
+    /// <summary>
+    /// Coordinates interaction between the main window view and the drawing model.
+    /// Handles user input and manages drawing states.
+    /// </summary>
     public class MainWindowPresenter
     {
         //-----------------------------------------------------------------------------
@@ -49,6 +53,11 @@ namespace Drawing_App_v01.Presenter
         //-----------------------------------------------------------------------------
 
         //- - - - -  CanvasPanel related events  - - - - -
+
+        /// <summary>
+        /// Handles paint events for the canvas, rendering the model and any temporary shapes.
+        /// </summary>
+        /// <param name="e">The paint event arguments.</param>
         internal void OnCanvasPanel_Paint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;

@@ -2,6 +2,10 @@
 
 namespace Drawing_App_v01.Model.ShapeComponents
 {
+    /// <summary>
+    /// Represents a point shape on the canvas. Also serves as a component for
+    /// other shapes (endpoints, corners, etc.).
+    /// </summary>
     public class Node : ShapeBase
     {
         public int X { get; set; }

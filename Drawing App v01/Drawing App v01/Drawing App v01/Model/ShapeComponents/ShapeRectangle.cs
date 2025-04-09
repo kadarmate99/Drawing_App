@@ -7,34 +7,26 @@ using System.Threading.Tasks;
 
 namespace Drawing_App_v01.Model.ShapeComponents
 {
+    /// <summary>
+    /// Represents a rectangle defined by two corner points.
+    /// </summary>
     internal class ShapeRectangle : ShapeBase
     {
-        /// <summary>
-        /// Upper left corner point of rectangle
-        /// </summary>
-        public Node CornerPoint_01 { get; set; }
-        /// <summary>
-        /// Upper right corner point of rectangle
-        /// </summary>
-        public Node CornerPoint_02 { get; set; }
-        /// <summary>
-        /// Lower right point of rectangle
-        /// </summary>
-        public Node CornerPoint_03 { get; set; }
-        /// <summary>
-        /// Lower left corner point of rectangle
-        /// </summary>
-        public Node CornerPoint_04 { get; set; }
+
+        public Node UperLeftCorner { get; set; }
+        public Node UperRightCorner { get; set; }
+        public Node LowerRightCorner { get; set; }
+        public Node LowerLeftCorner { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         
 
         public ShapeRectangle(Color shapeColor, Node point_01, Node point_02, int lineWeight)
         {
-            CornerPoint_01 = new Node();
-            CornerPoint_02 = new Node();
-            CornerPoint_03 = new Node();
-            CornerPoint_04 = new Node();
+            UperLeftCorner = new Node();
+            UperRightCorner = new Node();
+            LowerRightCorner = new Node();
+            LowerLeftCorner = new Node();
             RectanglePropertySetter(point_01, point_02);
             ShapeLineWeight = lineWeight;
             ShapeColor = shapeColor;
@@ -48,7 +40,7 @@ namespace Drawing_App_v01.Model.ShapeComponents
         {
             using (Pen pen = new Pen(ShapeColor, ShapeLineWeight))
             {
-                g.DrawRectangle(pen, CornerPoint_01.X, CornerPoint_01.Y, Width, Height );
+                g.DrawRectangle(pen, UperLeftCorner.X, UperLeftCorner.Y, Width, Height );
             }
         }
 
@@ -59,43 +51,43 @@ namespace Drawing_App_v01.Model.ShapeComponents
 
             if (diffX < 0 && diffY < 0)
             {
-                CornerPoint_01 = point_01;
+                UperLeftCorner = point_01;
             }
             else if (diffX > 0 && diffY > 0)
             {
-                CornerPoint_01 = point_02;
+                UperLeftCorner = point_02;
             }
             else if (diffX < 0 && diffY > 0)
             {
-                CornerPoint_01.X = point_01.X;
-                CornerPoint_01.Y = point_02.Y;
+                UperLeftCorner.X = point_01.X;
+                UperLeftCorner.Y = point_02.Y;
             }
             else if (diffX > 0 && diffY <0)
             {
-                CornerPoint_01.X = point_02.X;
-                CornerPoint_01.Y = point_01.Y;
+                UperLeftCorner.X = point_02.X;
+                UperLeftCorner.Y = point_01.Y;
             }
 
             Width = Math.Abs(diffX);
             Height = Math.Abs(diffY);
 
-            CornerPoint_02.X = CornerPoint_01.X + Width;
-            CornerPoint_02.Y = CornerPoint_01.Y;
+            UperRightCorner.X = UperLeftCorner.X + Width;
+            UperRightCorner.Y = UperLeftCorner.Y;
 
-            CornerPoint_03.X = CornerPoint_01.X + Width;
-            CornerPoint_03.Y = CornerPoint_01.Y + Height;
+            LowerRightCorner.X = UperLeftCorner.X + Width;
+            LowerRightCorner.Y = UperLeftCorner.Y + Height;
 
-            CornerPoint_04.X = CornerPoint_01.X;
-            CornerPoint_04.Y = CornerPoint_01.Y + Height;
+            LowerLeftCorner.X = UperLeftCorner.X;
+            LowerLeftCorner.Y = UperLeftCorner.Y + Height;
         }
 
         public override bool IsNear(Point p, int threshold)
         {
             return
-                DistanceToLine(CornerPoint_01, CornerPoint_02, p) <= threshold ||
-                DistanceToLine(CornerPoint_02, CornerPoint_03, p) <= threshold ||
-                DistanceToLine(CornerPoint_03, CornerPoint_04, p) <= threshold ||
-                DistanceToLine(CornerPoint_04, CornerPoint_01, p) <= threshold;
+                DistanceToLine(UperLeftCorner, UperRightCorner, p) <= threshold ||
+                DistanceToLine(UperRightCorner, LowerRightCorner, p) <= threshold ||
+                DistanceToLine(LowerRightCorner, LowerLeftCorner, p) <= threshold ||
+                DistanceToLine(LowerLeftCorner, UperLeftCorner, p) <= threshold;
         }
     }
 }

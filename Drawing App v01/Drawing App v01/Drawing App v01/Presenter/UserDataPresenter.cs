@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Drawing_App_v01.Presenter
 {
+    /// <summary>
+    /// Coordinates interaction between the user data form and the model.
+    /// Handles validation and persistence of user information.
+    /// </summary>
     public class UserDataPresenter
     {
         private readonly DrawingModel _model;
@@ -31,6 +35,10 @@ namespace Drawing_App_v01.Presenter
             }
         }
 
+        /// <summary>
+        /// Validates user input data for completeness and format correctness.
+        /// </summary>
+        /// <returns>A list of validation errors, or an empty list if validation passed.</returns>
         public List<string> ValidateUserData(string name, string email, string dateOfBirth, string address, string postalCode)
         {
             List<string> errors = new List<string>();

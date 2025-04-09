@@ -1,10 +1,12 @@
-﻿// Description: Centralized class for managing all drawing-related data
-
-using System.IO;
+﻿using System.IO;
 using Drawing_App_v01.Model.ShapeComponents;
 
 namespace Drawing_App_v01.Model
 {
+    /// <summary>
+    /// Centralized class for managing all drawing-related data, including shapes,
+    /// user information, and view settings.
+    /// </summary>
     public class DrawingModel
     {
         public List<ShapeBase> Shapes { get; private set; }
@@ -18,6 +20,11 @@ namespace Drawing_App_v01.Model
             Shapes = new List<ShapeBase>();
             UserData = new UserData();
         }
+
+        /// <summary>
+        /// Renders all shapes in the model to the specified graphics context.
+        /// </summary>
+        /// <param name="g">The graphics context to draw on.</param>
         public void RenderModel(Graphics g)
         {
             foreach (ShapeBase shape in Shapes)
@@ -48,8 +55,9 @@ namespace Drawing_App_v01.Model
         }
 
         /// <summary>
-        /// Updates the current model's data using the provided model instance, ensuring consistency across the application.
+        /// Imports data from another drawing model instance, replacing the current model's content.
         /// </summary>
+        /// <param name="source">The source model to import from.</param>
         public void ImportDataFrom(DrawingModel source)
         {
             ClearShapes();

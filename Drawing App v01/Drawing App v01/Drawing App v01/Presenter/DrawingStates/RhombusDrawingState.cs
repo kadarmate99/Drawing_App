@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Drawing_App_v01.Presenter.DrawingStates
 {
+    /// <summary>
+    /// Drawing state for creating rhombus shapes defined by center and corner points.
+    /// </summary>
     internal class RhombusDrawingState : ShapeDrawingStateBase
     {
         public RhombusDrawingState(DrawingSettings drawingSettings) : base(drawingSettings) { }

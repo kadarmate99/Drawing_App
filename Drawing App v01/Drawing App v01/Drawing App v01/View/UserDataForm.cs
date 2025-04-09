@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace Drawing_App_v01.View
 {
+    /// <summary>
+    /// Form for collecting and editing user information associated with the drawing file.
+    /// </summary>
     public partial class UserDataForm : Form
     {
         private readonly UserDataPresenter _presenter;
@@ -48,6 +51,10 @@ namespace Drawing_App_v01.View
             this.Close();
         }
 
+        /// <summary>
+        /// Loads user data from the model into the form fields.
+        /// </summary>
+        /// <param name="model">The drawing model containing user data.</param>
         internal void LoadUserData(DrawingModel model)
         {
             txtName.Text = model.UserData.Name;

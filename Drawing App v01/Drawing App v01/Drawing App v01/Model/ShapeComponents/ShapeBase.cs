@@ -4,17 +4,26 @@ using static System.Windows.Forms.AxHost;
 
 namespace Drawing_App_v01.Model.ShapeComponents
 {
+    /// <summary>
+    /// Abstract base class for all drawable shapes. Defines common properties and methods
+    /// that all shapes must implement.
+    /// </summary>
     public abstract class ShapeBase
     {
         public Color ShapeColor { get; set; }
         public int ShapeLineWeight { get; set; }
         public string ShapeName { get; set; }
 
+        /// <summary>
+        /// Draws the shape on the specified graphics context.
+        /// </summary>
+        /// <param name="g">The graphics context to draw on.</param>
         public abstract void Draw(Graphics g);
 
         /// <summary>
-        /// Checks if a point is near the shape.
+        /// Determines if a point is near this shape within a specified threshold.
         /// </summary>
+        /// <returns>True if the point is near the shape, false otherwise.</returns>
         public abstract bool IsNear(Point p, int threshold);
 
         /// <summary>

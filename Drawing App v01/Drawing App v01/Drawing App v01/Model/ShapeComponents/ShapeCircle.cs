@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Drawing_App_v01.Model.ShapeComponents
 {
+    /// <summary>
+    /// Represents a circle defined by a center point and radius point.
+    /// </summary>
     internal class ShapeCircle : ShapeBase
     {
         public Node CenterPoint { get; set; }

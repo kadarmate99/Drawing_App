@@ -4,6 +4,9 @@ using Drawing_App_v01.Presenter.Commands;
 
 namespace Drawing_App_v01.Presenter.DrawingStates
 {
+    /// <summary>
+    /// Drawing state for creating circles defined by center and radius points.
+    /// </summary>
     internal class CircleDrawingState : ShapeDrawingStateBase
     {
         public CircleDrawingState(DrawingSettings drawingSettings) : base(drawingSettings) { }

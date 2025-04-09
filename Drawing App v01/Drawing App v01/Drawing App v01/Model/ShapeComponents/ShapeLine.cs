@@ -3,7 +3,7 @@
 namespace Drawing_App_v01.Model.ShapeComponents
 {
     /// <summary>
-    /// Represents a line shape.
+    /// Represents a line between two points on the canvas.
     /// </summary>
     public class ShapeLine : ShapeBase
     {

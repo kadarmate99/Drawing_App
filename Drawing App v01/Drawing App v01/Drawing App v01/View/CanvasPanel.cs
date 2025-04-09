@@ -5,6 +5,10 @@ using System.Windows.Forms;
 
 namespace Drawing_App_v01.View
 {
+    /// <summary>
+    /// A specialized panel for rendering drawings with zoom and pan capabilities.
+    /// Handles mouse interactions for drawing and navigation.
+    /// </summary>
     public class CanvasPanel : Panel
     {
         private float _zoom = 1.0f; // Current zoom level
@@ -90,7 +94,11 @@ namespace Drawing_App_v01.View
         }
 
 
-        // Converts screen coordinates to world coordinates
+        /// <summary>
+        /// Converts screen coordinates to world (drawing) coordinates, accounting for zoom and pan.
+        /// </summary>
+        /// <param name="screenPoint">The screen coordinates to convert.</param>
+        /// <returns>The corresponding world coordinates.</returns>
         public Point ScreenToWorld(Point screenPoint)
         {
             using (Matrix inverseTransform = (Matrix)TransformationMatrix.Clone())
@@ -103,7 +111,11 @@ namespace Drawing_App_v01.View
 
         }
 
-        // Convert world coordinates to screen coordinates
+        /// <summary>
+        /// Converts world (drawing) coordinates to screen coordinates, accounting for zoom and pan.
+        /// </summary>
+        /// <param name="worldPoint">The world coordinates to convert.</param>
+        /// <returns>The corresponding screen coordinates.</returns>
         public Point WorldToScreen(Point worldPoint)
         {
             Point[] points = { worldPoint };
@@ -123,6 +135,11 @@ namespace Drawing_App_v01.View
             }
         }
 
+        /// <summary>
+        /// Configures the canvas view with specified zoom level and offset.
+        /// </summary>
+        /// <param name="savedZoom">The zoom level to apply.</param>
+        /// <param name="savedOffset">The pan offset to apply.</param>
         public void SetView(float savedZoom, PointF savedOffset)
         {
             _offset = savedOffset;

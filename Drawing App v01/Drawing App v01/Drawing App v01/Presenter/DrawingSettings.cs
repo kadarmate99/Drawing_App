@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// Holds settings related to drawing operations.
-/// </summary>
 namespace Drawing_App_v01.Presenter
 {
+    /// <summary>
+    /// Holds settings related to drawing operations, such as color, line width, and node size.
+    /// </summary>
     public class DrawingSettings
     {
         public Color DrawingColor { get; set; } = Color.Black;

@@ -4,6 +4,9 @@ using Drawing_App_v01.Presenter.Commands;
 
 namespace Drawing_App_v01.Presenter.DrawingStates
 {
+    /// <summary>
+    /// Drawing state for creating rectangles defined by two corner points.
+    /// </summary>
     public class RectangleDrawingState : ShapeDrawingStateBase
     {
         public RectangleDrawingState(DrawingSettings drawingSettings) : base(drawingSettings) { }

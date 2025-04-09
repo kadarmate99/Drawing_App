@@ -13,6 +13,9 @@ using Drawing_App_v01.Presenter;
 
 namespace Drawing_App_v01
 {
+    /// <summary>
+    /// The initial application window where users choose to create a new file or open an existing one.
+    /// </summary>
     public partial class WelcomeForm : Form
     {
         public event EventHandler<string> FileSelectedToOpen;
