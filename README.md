@@ -1,4 +1,4 @@
-This is my first project using **C#** to create a graphical drawing application. The project served as a hands-on learning experience, providing me with a deeper understanding of concepts like **Object-Oriented Programming (OOP)**, **event-driven programming**, and graphical interface design using the **WinForms** framework. While the app works as intended, I recognize areas where the code could be better organized and plan to rebuild it from scratch in the future.
+This is the first somewhat larger project I’ve done. I used **C#** to build a **CAD like graphical drawing application**. The project served as a hands-on learning experience, providing me with a deeper understanding of concepts like **Object-Oriented Programming (OOP)**, **event-driven programming**, and graphical interface design using the **WinForms** framework. While the app works as intended, I recognize areas where the code could be better organized and plan to rebuild it from scratch in the future.
 
 ---
 
