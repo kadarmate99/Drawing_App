@@ -1,4 +1,5 @@
 This is my first project using **C#** to create a graphical drawing application. The project served as a hands-on learning experience, providing me with a deeper understanding of concepts like **Object-Oriented Programming (OOP)**, **event-driven programming**, and graphical interface design using the **WinForms** framework. While the app works as intended, I recognize areas where the code could be better organized and plan to rebuild it from scratch in the future.
+
 ---
 
 ## Features
@@ -18,13 +19,11 @@ This is my first project using **C#** to create a graphical drawing application.
 
 - Multiple shapes (including mixed types) can coexist in a single workspace.
 
----
 
 ### 2. Object Interaction
 - Mouse cursor changes to indicate when it's near a drawn object.
 - Tooltips appear over shapes displaying their type (e.g., "Circle", "Line").
 
----
 
 ### 3. Workspace Management
 - Fully **zoomable** and **pannable** canvas.
@@ -32,13 +31,11 @@ This is my first project using **C#** to create a graphical drawing application.
 - Coordinate system conversion:
   - **Screen coordinates** ↔ **World coordinates**, ensuring transformations remain accurate.
 
----
 
 ### 4. Save and Load
 - Save your workspace, including all drawn shapes and user customization, in a `.json` file format.
 - Reload saved files seamlessly to continue work exactly as you left it.
 
----
 
 ### 5. User Data Integration
 - A **form** is included to collect user information:
